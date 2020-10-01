@@ -11,12 +11,14 @@
 </head>
 
 <body>
+{% block styles %}
+{% endblock %}
     <nav>
         <div class="nav-wrapper indigo darken-4">
-            <a href="{{ url_for('index') }}" class="brand-logo">Blackhole</a>
+            <h1 class="brand-logo">Blackhole</h1>
             <ul id="nav-mobile" class="right">
-                <li><a href="{{ url_for('login') }}">Login</a></li>
-                <li><a href="{{ url_for('signup') }}">Sign Up</a></li>
+                <li><a href="{{ url_for('login') }}" class="login">Login</a></li>
+                <li><a href="{{ url_for('signup') }}" class="signup">Sign Up</a></li>
             </ul>
         </div>
     </nav>

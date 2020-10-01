@@ -14,3 +14,15 @@ body #callout #callout-contain,
 body #callout #callout-contain .s12{
     padding: 0;
 }
+
+#callout {
+    background-image: url('../images/callout.jpg');
+    background-size: contain;
+    background-repeat: repeat-x;
+    height: 400px;
+}
+
+nav .brand-logo {
+    margin: 12.5px;
+    line-height: 140%;
+}
