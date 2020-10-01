@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat&display=swap');
+
+h1,h2,h3 {
+    font-family: 'Bebas Neue', cursive;
+}
+
+body {
+    background-color: black;
+    font-family: 'Montserrat', sans-serif;
+}
+
+
+body #callout #callout-contain,
+body #callout #callout-contain .s12{
+    padding: 0;
+}
