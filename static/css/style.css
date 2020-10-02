@@ -17,12 +17,22 @@ body #callout #callout-contain .s12{
 
 #callout {
     background-image: url('../images/callout.jpg');
-    background-size: contain;
+    background-size: cover;
     background-repeat: repeat-x;
-    height: 400px;
+    height: 600px;
 }
 
 nav .brand-logo {
     margin: 12.5px;
     line-height: 140%;
+}
+
+
+#login-form-card {
+    margin-top: 5em;
+    border: solid 2px #1565c0;
+}
+
+#callout #login-form-card input {
+    color: #1e88e5;
 }
