@@ -28,11 +28,11 @@ nav .brand-logo {
 }
 
 
-#login-form-card {
+#landing-card {
     margin-top: 5em;
     border: solid 2px #1565c0;
 }
 
-#callout #login-form-card input {
+#callout #landing-card input {
     color: #1e88e5;
 }

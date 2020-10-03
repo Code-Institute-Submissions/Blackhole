@@ -6,4 +6,63 @@
 } </style>
 {% endblock %}
 
-{% block content %} Signup {% endblock %}
+{% block content %} 
+
+<section id="callout" class="row">
+    <div id="landing-card" class="card black col s8 m6 l4 right pull-s2 pull-m3 pull-l1">
+        <div class="card-content blue-text darken-1">
+            <span class="card-title">Sign Up</span>
+             <div class="row">
+    <form class="col s12">
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="first_name" name="first_name" type="text" class="validate"
+           minlength="3" maxlength="20" pattern="^[a-zA-Z]{3,20}$" required>
+          <label for="first_name">First Name</label>
+        </div>
+        <div class="input-field col s12">
+          <input id="last_name" name="last_name" type="text" class="validate"
+           minlength="3" maxlength="20" pattern="^[a-zA-Z]{3,20}$" required>
+          <label for="last_name">Last Name</label>
+        </div>
+        <div class="input-field col s12">
+          <input id="username" name="username" type="text" class="validate"
+           minlength="5" maxlength="20" pattern="^[a-zA-Z0-9]{5,20}$" required>
+          <label for="username">Username</label>
+        </div>
+        <div class="input-field col s12">
+          <input id="email" name="email" type="email" class="validate" required>
+          <label for="email">Email</label>
+        </div>
+        <div class="input-field col s12">
+          <input id="phone-number" name="phone-number" type="number" class="validate"
+           minlength="11" maxlength="12" pattern="^[0-9]{11,12}$" required>
+          <label for="phone-number">Phone Number</label>
+        </div>
+        <div class="input-field col s12">
+          <input id="password" name="password" type="password" class="validate"
+           minlength="10" maxlength="20" required>
+          <label for="password">Password</label>
+        </div>
+        <div class="input-field col s12">
+          <input id="confirm-password" name="confirm-password" type="password" class="validate"
+           minlength="10" maxlength="20" required>
+          <label for="confirm-password">Confirm Password</label>
+        </div>
+      </div>
+      <div class="input-field col s12">
+                            <button id="signup-submit" class="btn" type="submit" name="signup-submit"> Register
+                                <i class="fas fa-sign-in-alt"></i>
+                            </button>
+                        </div>
+    </form>
+  </div>
+  
+        </div>
+        <div class="card-action">
+            <a href="{{ url_for('login') }}">Already Registered?</a>
+        </div>
+    </div>
+</section>
+
+ {% endblock %}
