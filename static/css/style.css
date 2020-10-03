@@ -17,7 +17,7 @@ body #callout #callout-contain .s12{
 
 #callout {
     background-image: url('../images/callout.jpg');
-    background-size: cover;
+    background-size: 1500px;
     background-repeat: repeat-x;
     height: 600px;
 }
