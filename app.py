@@ -27,23 +27,30 @@ def login():
 @app.route('/signup', methods=["GET", "POST"])
 def signup():
     if request.method == 'POST':
-        # check if username exsists
-        existing_user = mongo.db.users.find_one(
-            {"username": request.form.get('username').lower()})
+        if request.form.get('password') == request.form.get('confirm-password'):
+            # check if username exsists
+            existing_user = mongo.db.users.find_one(
+                {"username": request.form.get('username').lower()})
 
-        if existing_user:
-            flash('Username already exists')
-            return redirect(url_for('signup'))
+            if existing_user:
+                flash('Username already exists')
+                return redirect(url_for('signup'))
 
-        signup = {
-        "username": request.form.get('username').lower(),
-        "password": generate_password_hash(request.form.get('password'))
-        }
-        mongo.db.users.insert_one(signup)
-        # put the user into session
-        session['user'] = request.form.get('username').lower()
-        flash('Registered Successfully')
-        return redirect(url_for('login'))
+            signup = {
+                "first_name": request.form.get('first_name'),
+                "last_name": request.form.get('last_name'),
+                "username": request.form.get('username').lower(),
+                "email": request.form.get('email').lower(),
+                "phone_number": request.form.get('phone_number'),
+                "password": generate_password_hash(request.form.get('password'))
+            }
+            mongo.db.users.insert_one(signup)
+            # put the user into session
+            session['user'] = request.form.get('username').lower()
+            flash('Registered Successfully')
+            return redirect(url_for('login'))
+        else:
+            flash('Password Do Not Match!')
     return render_template('signup.html')
 
 
