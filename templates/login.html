@@ -11,10 +11,10 @@
         <div class="card-content blue-text darken-1">
             <span class="card-title">Login</span>
             <div class="row">
-                <form class="col s12">
+                <form class="col s12" method="POST" action="{{ url_for('login') }}">
                     <div class="row">
                         <div class="input-field col s12">
-                            <input id="login-username" name="login-password" type="text" class="validate" required>
+                            <input id="login-username" name="login-username" type="text" class="validate" required>
                             <label for="login-username"><i class="fas fa-user"></i> Username</label>
                         </div>
                         <div class="input-field col s12">
