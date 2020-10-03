@@ -62,6 +62,7 @@ def signup():
                 "last_name": request.form.get('last_name'),
                 "username": request.form.get('username').lower(),
                 "email": request.form.get('email').lower(),
+                "DOB": request.form.get('DOB'),
                 "phone_number": request.form.get('phone_number'),
                 "password": generate_password_hash(request.form.get('password'))
             }
