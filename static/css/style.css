@@ -33,6 +33,24 @@ nav .brand-logo {
     border: solid 2px #1565c0;
 }
 
-#callout #landing-card input {
+#callout #landing-card input,
+#nav-mobile li a{
     color: #1e88e5;
+}
+
+@media only screen and (max-width: 350px) {
+    .nav-wrapper i {
+        font-size: 1.35em;
+    }
+}
+
+#nav-mobile {
+  display: flex;
+  justify-content: space-between;
+}
+
+@media only screen and (min-width: 600px) {
+    #nav-mobile {
+        float: right;
+    }
 }

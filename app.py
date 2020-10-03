@@ -32,6 +32,7 @@ def login():
                     existing_user["password"], request.form.get("login-password")):
                         session["user"] = request.form.get("login-username").lower()
                         flash("Welcome")
+                        return redirect(url_for('home'))
             else:
                 # invalid password match
                 flash("Incorrect Username and/or Password")
@@ -70,7 +71,7 @@ def signup():
             # put the user into session
             session['user'] = request.form.get('username').lower()
             flash('Registered Successfully')
-            return redirect(url_for('login'))
+            return redirect(url_for('home'))
         else:
             flash('Password Do Not Match!')
     return render_template('signup.html')
@@ -79,6 +80,36 @@ def signup():
 @app.route('/support')
 def support():
     return render_template('support.html')
+
+
+@app.route('/home')
+def home():
+    return render_template('home.html')
+
+
+@app.route('/search')
+def search():
+    return render_template('search.html')
+
+
+@app.route('/news_feed')
+def news_feed():
+    return render_template('news_feed.html')
+
+
+@app.route('/notifications')
+def notifications():
+    return render_template('notifications.html')
+
+
+@app.route('/friends')
+def friends():
+    return render_template('friends.html')
+
+
+@app.route('/settings')
+def settings():
+    return render_template('settings.html')
 
 
 if __name__ == "__main__":

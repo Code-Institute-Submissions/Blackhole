@@ -7,15 +7,46 @@
     <title>Blackhole</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link rel="stylesheet" href="{{ url_for('static' filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 
 <body>
+{% block styles %}
+{% endblock %}
+  <nav>
+        <div class="nav-wrapper black">
+            <h1 class="brand-logo blue-text darken-4 left hide-on-small-and-down">Blackhole</h1>
+            <ul id="nav-mobile">
+        <li id="home"><a href="{{ url_for('home') }}"><i class="fas fa-home"></i></a></li>
+        <li id="search"><a href="{{ url_for('search') }}"><i class="fas fa-search"></i></a></li>
+        <li id="news_feed"><a href="{{ url_for('news_feed') }}"><i class="fas fa-newspaper"></i></a></li>
+        <li id="friends"><a href="{{ url_for('friends') }}"><i class="fas fa-user-friends"></i></a></li>
+        <li id="notifications"><a href="{{ url_for('notifications') }}"><i class="fas fa-flag"></i></a></li>
+        <li id="settings"><a href="{{ url_for('settings') }}"><i class="fas fa-cogs"></i></a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section>
+        <!-- flash messages -->
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="row flashes" style="margin: 0;">
+                        <h3 class="blue darken-1 center-align" style="line-height: 120%;">{{ message }}</h3>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </section>
+
+{% block content %}
+{% endblock %}
 
 </body>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.js" integrity="sha256-DrT5NfxfbHvMHux31Lkhxg42LY6of8TaYyK50jnxRnM=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 
 </html>
