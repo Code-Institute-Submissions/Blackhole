@@ -82,8 +82,10 @@ def support():
     return render_template('support.html')
 
 
-@app.route('/home')
+@app.route('/home', methods=["GET", "POST"])
 def home():
+    if request.method == 'POST':
+        return redirect(url_for('home'))
     return render_template('home.html')
 
 

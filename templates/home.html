@@ -2,35 +2,32 @@
 {% block styles %}
 {% endblock %}
 {% block content %}
-<style> 
-body {
-background-color: white;
-}
-
-.col {
-    border: solid 2px black;
-}
-</style>
 <section class="row">
-<div id="profile-home" style="background-color: white;">
-        <div class="col s0 m4 l3">
+<!-- PROFILE SECTION -->
+    <div id="profile-home" class="side-view">
+        <div class="col s0 m4 l3 contain grey darken-4">
         TEST
         </div>
     </div>
-</div>
-<div id="acitivity" style="background-color: red;">
-        <div class="col s12 m8 l6">
+<!-- ACTIVITY / NEWS FEED -->
+    <div id="acitivity">
+        <div class="col s12 m8 l6 contain">
+              <div class="row">
+    <form method="POST" action="{{ url_for('home') }}" >
+        <div class="input-field col s12">
+          <textarea id="acitivity-post" name="acitivity-post" class="materialize-textarea"></textarea>
+          <label for="acitivity-post">Want to update your friends and family?</label>
+        </div>
+    </form>
+  </div>
+        </div>
+    </div>
+<!-- FRIENDS -->
+    <div id="friends-list" class="side-view">
+        <div class="col s0 m0 l3 contain grey darken-4">
         TEST
         </div>
     </div>
-</div>
-
-<div id="friends-list" style="background-color: blue;">
-        <div class="col s0 m0 l3">
-        TEST
-        </div>
-    </div>
-</div>
 </section>
 
 {% endblock %}
