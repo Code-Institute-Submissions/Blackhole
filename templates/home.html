@@ -13,14 +13,22 @@
     <div id="acitivity">
         <div class="col s12 m8 l6 contain">
             <div class="row">
-                <form method="POST" action="{{ url_for('home') }}" >
-                    <div class="input-field col s12">
+                <form id="new-post" method="POST" action="{{ url_for('home') }}" >
+    <div class="col s1"></div>
+                    <div class="input-field col s10 push-1">
+                    <!-- Text descripton for the post-->
                         <textarea id="acitivity-post" name="acitivity-post" class="materialize-textarea"></textarea>
-                        <label for="acitivity-post">Want to update your friends and family?</label>
+                        <label id="label-post" for="acitivity-post">Want to update your friends and family?</label>
+                    <!-- image upload ( need to add image preview still ) -->
+                        <input type="file" name="image-post" id="image-post" hidden="hidden">
+                        <i id="image-post-icon" class="btn fas fa-camera"></i>
+                    <!-- mentioning friends on the post which also notifies the friend ( still need to figure out how to do it )-->
+                        <input type="checkbox" name="post-mentions" id="post-mentions" hidden>
+                        <i id="post-mentions-icon" class="btn fas fa-users"></i>
+                    <!-- post submit button -->
+                        <button name="post-submit" type="submit" class="btn" style="float:right;"><i class="fas fa-location-arrow"></i></button>
                     </div>
-                    <div id="form-options">
-                        <input type="file" name="image-post" id="image-post" alt="Image">
-                    </div>
+    <div class="col s1"></div>
                 </form>
             </div>
         </div>

@@ -71,3 +71,15 @@ nav .brand-logo {
         float: right;
     }
 }
+
+.input-field {
+    background-color: #212121;
+    border: solid 2px #1e88e5;
+    border-radius: 5px;
+}
+
+#new-post .input-field .btn {
+    color:white;
+    background-color: transparent;
+    box-shadow: none;
+}
