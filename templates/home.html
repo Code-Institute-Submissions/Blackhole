@@ -5,20 +5,24 @@
 <section class="row">
 <!-- PROFILE SECTION -->
     <div id="profile-home" class="side-view">
-        <div class="col s0 m4 l3 contain grey darken-4">
-        TEST
+        <div class="col s2 m4 l3 contain grey darken-4">
+            <div id="home-mobile-side-nav">
+                <div id="profile-pop-out">
+                    <i id="profile-pop-out-icon" class="fas fa-user-circle"></i>
+                </div>
+            </div>
         </div>
     </div>
 <!-- ACTIVITY / NEWS FEED -->
     <div id="acitivity">
-        <div class="col s12 m8 l6 contain">
+        <div class="col s10 m8 l6 contain">
             <div class="row">
                 <form id="new-post" method="POST" action="{{ url_for('home') }}" >
     <div class="col s1"></div>
                     <div class="input-field col s10 push-1">
                     <!-- Text descripton for the post-->
                         <textarea id="acitivity-post" name="acitivity-post" class="materialize-textarea"></textarea>
-                        <label id="label-post" for="acitivity-post">Want to update your friends and family?</label>
+                        <label id="label-post" for="acitivity-post">Type your new post here:</label>
                     <!-- image upload ( need to add image preview still ) -->
                         <input type="file" name="image-post" id="image-post" hidden="hidden">
                         <i id="image-post-icon" class="btn fas fa-camera"></i>
@@ -38,6 +42,12 @@
         <div class="col s0 m0 l3 contain grey darken-4">
         TEST
         </div>
+    </div>
+</section>
+<!-- PROFILE POP OUT FOR MOBILE -->
+<section class="row">
+    <div id="profile-pop-out-section" class="col s10 push-2">
+        Test
     </div>
 </section>
 

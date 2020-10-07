@@ -5,11 +5,11 @@ $(document).ready(function(){
         autoClose: true,
         yearRange: 100,
     });
+    $('.sidenav').sidenav();
 });
 
-// need to fix for clicking else where 
-$(document).on('click', '#acitivity-post', function() {
-    $('#label-post').toggle();
+$(document).on('click', '#profile-pop-out-icon', function() {
+    $('#profile-pop-out-section').toggle();
 })
 
 $(document).on('click', '#image-post-icon', function() {

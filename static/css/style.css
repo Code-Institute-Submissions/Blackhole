@@ -33,7 +33,9 @@ nav .brand-logo {
     border: solid 2px #1565c0;
 }
 
-#callout #landing-card input {
+#callout #landing-card .input-field,
+#callout #landing-card label,
+#callout #landing-card input  {
     color: #1e88e5;
 }
 
@@ -72,14 +74,35 @@ nav .brand-logo {
     }
 }
 
-.input-field {
+#acitivity .input-field {
     background-color: #212121;
     border: solid 2px #1e88e5;
     border-radius: 5px;
+    padding-top: 2em;
+}
+
+#acitivity #label-post {
+    padding-top: 1em;
 }
 
 #new-post .input-field .btn {
     color:white;
     background-color: transparent;
     box-shadow: none;
+}
+
+#profile-pop-out-icon {
+    font-size: 34px;
+    padding-top: 10px;
+}
+
+#profile-pop-out-section {
+    position: absolute;
+    top: 56px;
+    right: 0;
+    background-color: #212121;
+    border: solid 2px #1e88e5;
+    border-radius: 5px;
+    height: 100px;
+    color: white;
 }
