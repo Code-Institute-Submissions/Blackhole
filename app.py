@@ -7,7 +7,9 @@ from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
 if os.path.exists('env.py'):
     import env
-
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 
 app = Flask(__name__)
 
@@ -17,6 +19,7 @@ app.secret_key = os.environ.get('SECRET_KEY')
 
 mongo = PyMongo(app)
 
+app.config['cloud_name'] = os.environ.get('cloud_name')
 
 @app.route('/')
 @app.route("/login", methods=["GET", "POST"])
@@ -111,6 +114,7 @@ def friends():
 
 @app.route('/settings')
 def settings():
+    # for the themes add if statements in the base url to check the user settings and display specific css
     return render_template('settings.html')
 
 
