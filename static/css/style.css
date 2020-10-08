@@ -55,7 +55,7 @@ nav .brand-logo {
   justify-content: space-between;
 }
 
-#acitivity .contain {
+#activity .contain {
     border: 2px solid #1e88e5;
     border-top: none;
     height: 1000px;
@@ -65,7 +65,6 @@ nav .brand-logo {
 #profile-home .contain {
     border-top:  2px solid #1e88e5;
     color: #1e88e5;
-    height: 1000px;
 }
 
 @media only screen and (min-width: 600px) {
@@ -74,14 +73,14 @@ nav .brand-logo {
     }
 }
 
-#acitivity .input-field {
+#activity .post {
     background-color: #212121;
     border: solid 2px #1e88e5;
     border-radius: 5px;
     padding-top: 2em;
 }
 
-#acitivity #label-post {
+#activity #label-post {
     padding-top: 1em;
 }
 
@@ -105,4 +104,14 @@ nav .brand-logo {
     border-radius: 5px;
     height: 100px;
     color: white;
+}
+
+#profile-pop-out-section {
+    display: none;
+}
+
+@media screen and (min-width:765px) {
+    #home-mobile-side-nav {
+        display: none;
+    }
 }

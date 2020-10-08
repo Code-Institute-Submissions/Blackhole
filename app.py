@@ -84,9 +84,20 @@ def support():
 
 @app.route('/home', methods=["GET", "POST"])
 def home():
+    posts = list(mongo.db.posts.find())
+
     if request.method == 'POST':
+        username = mongo.db.users.find_one(
+        {'username': session['user']})['username']
+
+        new_post = {
+            'description': request.form.get('activity-post'),
+            'created_by': username
+        }
+        mongo.db.posts.insert_one(new_post)
+        flash('Posted Successfully!')
         return redirect(url_for('home'))
-    return render_template('home.html')
+    return render_template('home.html', posts=posts)
 
 
 @app.route('/search')
