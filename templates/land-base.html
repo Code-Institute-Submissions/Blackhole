@@ -7,7 +7,7 @@
     <title>Blackhole</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/land-style.css') }}">
 </head>
 
 <body>
@@ -15,7 +15,7 @@
 {% endblock %}
     <nav>
         <div class="nav-wrapper black">
-            <h1 class="brand-logo blue-text darken-4">Blackhole</h1>
+            <h1 class="brand-logo blue-text darken-4 left">Blackhole</h1>
             <ul id="nav-mobile" class="right">
                 <li><a href="{{ url_for('login') }}" class="login blue-text darken-1">Login</a></li>
                 <li><a href="{{ url_for('signup') }}" class="signup blue-text darken-1">Sign Up</a></li>
@@ -42,7 +42,7 @@
         <div class="left col s12 m6">
             <p>Blackhole</p>
         </div>
-        <div class="right col c12 m6">
+        <div id="FAQ" class="right col c12 m6">
             <a href="{{ url_for('support') }}"> Need Help?</a>
         </div>
     </footer>

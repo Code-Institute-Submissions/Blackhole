@@ -1,0 +1,67 @@
+/* GLOBAL STYLES */
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat&display=swap');
+
+h1,h2,h3 {
+    font-family: 'Bebas Neue', cursive;
+}
+
+body {
+    background-color: black;
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* CALLOUT */
+
+body #callout #callout-contain,
+body #callout #callout-contain .s12{
+    padding: 0;
+}
+
+#callout {
+    background-image: url('../images/callout.jpg');
+    background-size: 1500px;
+    background-repeat: repeat-x;
+    height: 600px;
+}
+
+/* NAVBAR AND LOGO */
+
+nav .brand-logo {
+    margin: 12.5px;
+    line-height: 120%;
+}
+
+
+#landing-card {
+    margin-top: 5em;
+    border: solid 2px #1565c0;
+}
+
+#callout #landing-card .input-field,
+#callout #landing-card label,
+#callout #landing-card input  {
+    color: #1e88e5;
+}
+
+/* FOOTER */
+
+#FAQ {
+    margin-right: 3em;
+}
+
+/* DIFFERENT DEVICES */
+
+@media screen and (min-width: 700px) {
+    /* CALLOUT */
+    #callout {
+        height: 700px;
+    }
+}
+
+@media screen and (min-width: 1000px) {
+    /* CALLOUT */
+    #callout {
+        height: 800px;
+    }
+}
