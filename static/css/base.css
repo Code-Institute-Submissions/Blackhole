@@ -46,9 +46,13 @@ nav .brand-logo {
     margin-top: 1em;
 }
 
-/* POP OUTS */
+/* POP OUTS AND POP OUT ICONS */
 
 #pop-outs {
+    display: none;
+}
+
+.profile-pop-out-icon {
     display: none;
 }
 

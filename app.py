@@ -87,16 +87,20 @@ def home():
     posts = list(mongo.db.posts.find())
 
     if request.method == 'POST':
-        username = mongo.db.users.find_one(
-        {'username': session['user']})['username']
+        username = mongo.db.users.find_one({'username': session['user']})['username']
+        if request.form.get('post-submit'):
+            new_post = {
+                'description': request.form.get('activity-post'),
+                'created_by': username
+            }
+            mongo.db.posts.insert_one(new_post)
+            flash('Posted Successfully!')
+            return redirect(url_for('home'))
+        if request.form.get('like'):
+            postID = request.form.get('post_id')
+            mongo.db.posts.postID.liked_by('username')
 
-        new_post = {
-            'description': request.form.get('activity-post'),
-            'created_by': username
-        }
-        mongo.db.posts.insert_one(new_post)
-        flash('Posted Successfully!')
-        return redirect(url_for('home'))
+        
     return render_template('home.html', posts=posts)
 
 

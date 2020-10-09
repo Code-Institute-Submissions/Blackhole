@@ -44,13 +44,16 @@
                     </div>
                     <hr>
                     <div class="post-interactivity">
-                        <i class="fas fa-heart"></i>
+                    <form>
+                        <id name="post_id" hidden>{{ post._Id }}</id>
+                        <button type="submit" name="like"><i class="fas fa-heart"></i></button>
                         {% if post.created_by == session.user or session.user == user.super_user == true %}
                             {% if post.created_by == session.user %}
                             <i class="fas fa-pencil-alt right"></i>
                             {% endif %}
                         <i class="fas fa-trash-alt right"></i>
                         {% endif %}
+                    </form>
                     </div>
                 </div>
                 {% endfor %}
