@@ -97,9 +97,7 @@ def home():
             flash('Posted Successfully!')
             return redirect(url_for('home'))
         if request.form.get('like'):
-            postID = request.form.get('post_id')
-            mongo.db.posts.postID.liked_by('username')
-
+            post = mongo.db.posts.find_one({"_id": ObjectId(post_id)})
         
     return render_template('home.html', posts=posts)
 

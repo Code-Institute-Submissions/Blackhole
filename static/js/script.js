@@ -19,3 +19,7 @@ $(document).on('click', '#image-post-icon', function() {
 $(document).on('click', '#mentions-post-icon', function() {
     $('#mentions-post').click();
 })
+
+if ($('#dark_theme') == checked ) {
+    $('#light_theme').prop('checked', false);
+}
