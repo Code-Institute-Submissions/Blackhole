@@ -1,0 +1,92 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat&display=swap');
+
+/* GLOBAL STYLING */
+
+h1,h2,h3,h4,h5 {
+    font-family: 'Bebas Neue', cursive;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* NAV BAR */
+
+nav .brand-logo {
+    margin: 12.5px;
+    line-height: 140%;
+}
+
+#nav-mobile {
+  display: flex;
+  justify-content: space-between;
+  height: 64px;
+}
+
+/* FLASHES */
+
+.flashes > h3 {
+    line-height: 120%;
+}
+
+/* POSTS AND POSTING */
+
+#activity #label-post {
+    padding-top: 1em;
+}
+
+#activity .post {
+    border: solid 2px;
+    border-radius: 5px;
+    padding-top: 2em;
+}
+
+.posted {
+    overflow-wrap: anywhere;
+    margin-top: 1em;
+}
+
+/* POP OUTS */
+
+#pop-outs {
+    display: none;
+}
+
+/* VERY SMALL MOBILE DEVICES */
+
+@media only screen and (max-width: 350px) {
+    /* NAV BAR */
+
+    #nav-mobile {
+        height: 56px;
+    }
+
+    .nav-wrapper li{
+        height: 56px;
+    }
+
+    .nav-wrapper i {
+        font-size: 1.35em;
+        height: 19px;
+    }
+}
+
+/* SMALL MOBILE DEVICES AND UP*/
+
+@media only screen and (min-width: 350px) {
+    /* NAV BAR */
+    .nav-wrapper i {
+        font-size: 1.55em;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    /* SIDE VIEWS */
+    .profile-pop-out-icon {
+    font-size: 34px;
+    margin-top: 10px;
+    }
+    #friends-list {
+        display: none;
+    }
+}

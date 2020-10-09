@@ -4,21 +4,22 @@
 {% block content %}
 <section class="row">
 <!-- PROFILE SECTION -->
-    <div id="profile-home" class="side-view grey darken-4">
-        <div class="col s2 m4 l3 contain">
+    <div id="profile-home" class="col s2 m4 l3 side-view grey darken-4">
+        <div class="contain">
             <div id="home-mobile-side-nav">
                 <div id="profile-pop-out">
-                    <i id="profile-pop-out-icon" class="fas fa-user-circle"></i>
+                    <i class="profile-pop-out-icon fas fa-user-circle"></i>
+                    <i class="profile-pop-out-icon fas fa-comments"></i>
+                    <i class="profile-pop-out-icon fas fa-sign-out-alt"></i>
                 </div>
             </div>
         </div>
     </div>
 <!-- ACTIVITY / NEWS FEED -->
-    <div id="activity" class="row">
-        <div class="col s10 m8 l6 contain">
+    <div id="activity" class="col s10 m8 l6">
+        <div class="contain">
                 <form id="new-post" method="POST" action="{{ url_for('home') }}" >
-                    <div class="col s1"></div>
-                    <div class="input-field post col s10 push-1">
+                    <div class="input-field post col s12">
                     <!-- Text descripton for the post-->
                         <textarea id="activity-post" name="activity-post" class="materialize-textarea"></textarea>
                         <label id="label-post" for="activity-post">Type your new post here:</label>
@@ -31,12 +32,9 @@
                     <!-- post submit button -->
                         <button name="post-submit" type="submit" class="btn" style="float:right;"><i class="fas fa-location-arrow"></i></button>
                     </div>
-                    <div class="col s1"></div>
                 </form>
                 {% for post in posts %}
-                <div class="col s12">
-                <div class="col s1"></div>
-                <div class="posted col s10 push-1 post">
+                <div class="posted col s12 post">
                     <div class="posted-by">
                         {{ post.created_by }}
                     </div>
@@ -47,27 +45,30 @@
                     <hr>
                     <div class="post-interactivity">
                         <i class="fas fa-heart"></i>
-                        {% if post.created_by == session.user %}
-                        <i class="fas fa-pencil-alt"></i>
-                        <i class="fas fa-trash-alt"></i>
+                        {% if post.created_by == session.user or session.user == user.super_user == true %}
+                            {% if post.created_by == session.user %}
+                            <i class="fas fa-pencil-alt right"></i>
+                            {% endif %}
+                        <i class="fas fa-trash-alt right"></i>
                         {% endif %}
                     </div>
-                </div>
-                <div class="col s1"></div>
                 </div>
                 {% endfor %}
         </div>
     </div>
 <!-- FRIENDS -->
-    <div id="friends-list" class="side-view">
-        <div class="col s0 m0 l3 contain grey darken-4">
+    <div id="friends-list" class="col s0 m0 l3 side-view grey darken-4">
+        <div class=" contain">
         TEST
         </div>
     </div>
 </section>
-<!-- PROFILE POP OUT FOR MOBILE -->
-<section class="row">
-    <div id="profile-pop-out-section" class="col s10 push-2">
+<!-- POP OUTS FOR MOBILE -->
+<section id="pop-outs" class="row">
+    <div id="profile-pop-out-section" class="col s10">
+        Test
+    </div>
+    <div id="friends-pop-out-section" class="col s10">
         Test
     </div>
 </section>

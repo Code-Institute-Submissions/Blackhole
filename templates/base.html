@@ -7,7 +7,8 @@
     <title>Blackhole</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    <!--<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">-->
 </head>
 
 <body>
@@ -16,8 +17,8 @@
 
   <nav>
         <div class="nav-wrapper black">
-            <h1 class="brand-logo blue-text darken-4 left hide-on-small-and-down">Blackhole</h1>
-            <ul id="nav-mobile">
+            <h1 class="brand-logo left hide-on-small-and-down">Blackhole</h1>
+            <ul id="nav-mobile" class="right">
         <li id="home"><a href="{{ url_for('home') }}"><i class="fas fa-home"></i></a></li>
         <li id="search"><a href="{{ url_for('search') }}"><i class="fas fa-search"></i></a></li>
         <li id="news_feed"><a href="{{ url_for('news_feed') }}"><i class="fas fa-newspaper"></i></a></li>
@@ -34,7 +35,7 @@
             {% if messages %}
                 {% for message in messages %}
                     <div class="row flashes" style="margin: 0;">
-                        <h3 class="blue darken-1 center-align" style="line-height: 120%;">{{ message }}</h3>
+                        <h3 class="center-align">{{ message }}</h3>
                     </div>
                 {% endfor %}
             {% endif %}
