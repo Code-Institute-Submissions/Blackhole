@@ -3,7 +3,7 @@
 {% endblock %}
 {% block content %}
 <section class="row">
-<!-- PROFILE SECTION -->
+    <!-- PROFILE SECTION -->
     <div id="profile-home" class="col s2 m4 l3 side-view grey darken-4">
         <div class="contain">
             <div id="home-mobile-side-nav">
@@ -15,54 +15,51 @@
             </div>
         </div>
     </div>
-<!-- ACTIVITY / NEWS FEED -->
+    <!-- ACTIVITY / NEWS FEED -->
     <div id="activity" class="col s10 m8 l6">
         <div class="contain">
-                <form id="new-post" method="POST" action="{{ url_for('home') }}" >
-                    <div class="input-field post col s12">
+            <form id="new-post" method="POST" action="{{ url_for('home') }}">
+                <div class="input-field post col s12">
                     <!-- Text descripton for the post-->
-                        <textarea id="activity-post" name="activity-post" class="materialize-textarea"></textarea>
-                        <label id="label-post" for="activity-post">Type your new post here:</label>
+                    <textarea id="activity-post" name="activity-post" class="materialize-textarea"></textarea>
+                    <label id="label-post" for="activity-post">Type your new post here:</label>
                     <!-- image upload ( need to add image preview still ) -->
-                        <input type="file" name="image-post" id="image-post" hidden="hidden">
-                        <i id="image-post-icon" class="btn fas fa-camera"></i>
+                    <input type="file" name="image-post" id="image-post" hidden="hidden">
+                    <i id="image-post-icon" class="btn fas fa-camera"></i>
                     <!-- mentioning friends on the post which also notifies the friend ( still need to figure out how to do it )-->
-                        <input type="checkbox" name="post-mentions" id="post-mentions" hidden>
-                        <i id="post-mentions-icon" class="btn fas fa-users"></i>
+                    <input type="checkbox" name="post-mentions" id="post-mentions" hidden>
+                    <i id="post-mentions-icon" class="btn fas fa-users"></i>
                     <!-- post submit button -->
-                        <button name="post-submit" type="submit" class="btn" style="float:right;"><i class="fas fa-location-arrow"></i></button>
-                    </div>
-                </form>
-                {% for post in posts %}
-                <div class="posted col s12 post">
-                    <div class="posted-by">
-                        {{ post.created_by }}
-                    </div>
-                    <hr>
-                    <div class="post-content">
-                        {{ post.description }}
-                    </div>
-                    <hr>
-                    <div class="post-interactivity">
-                    <form>
-                        <id name="post_id" hidden>{{ post._Id }}</id>
-                        <button type="submit" name="like"><i class="fas fa-heart"></i></button>
-                        {% if post.created_by == session.user or session.user == user.super_user == true %}
-                            {% if post.created_by == session.user %}
-                            <i class="fas fa-pencil-alt right"></i>
-                            {% endif %}
-                        <i class="fas fa-trash-alt right"></i>
-                        {% endif %}
-                    </form>
-                    </div>
+                    <button name="post-submit" type="submit" class="btn" style="float:right;"><i class="fas fa-location-arrow"></i></button>
                 </div>
-                {% endfor %}
+            </form>
+            {% for post in posts %}
+            <div class="posted col s12 post">
+                <div class="posted-by-and-when">
+                    {{ post.created_by }} - {{ post.date_posted }} - {{ post.time_posted }}
+                </div>
+                <hr>
+                <div class="post-content">
+                    {{ post.description }}
+                </div>
+                <hr>
+                <div class="post-interactivity">
+                    <!--<form>
+                            <button type="submit" name="like"><i class="fas fa-heart"></i></button>
+                            {% if post.created_by == session.user %}
+                                <i class="fas fa-pencil-alt right"></i>
+                                <i class="fas fa-trash-alt right"></i>
+                            {% endif %}
+                        </form>-->
+                </div>
+            </div>
+            {% endfor %}
         </div>
     </div>
-<!-- FRIENDS -->
+    <!-- FRIENDS -->
     <div id="friends-list" class="col s0 m0 l3 side-view grey darken-4">
         <div class=" contain">
-        TEST
+            TEST
         </div>
     </div>
 </section>
@@ -75,5 +72,4 @@
         Test
     </div>
 </section>
-
 {% endblock %}

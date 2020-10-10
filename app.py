@@ -5,6 +5,7 @@ from flask import (
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
+from datetime import date, datetime, time
 if os.path.exists('env.py'):
     import env
 
@@ -17,6 +18,10 @@ app.secret_key = os.environ.get('SECRET_KEY')
 mongo = PyMongo(app)
 
 app.config['cloud_name'] = os.environ.get('cloud_name')
+
+now = datetime.now()
+current_time = now.strftime("%H:%M:%S")
+current_date = date_time = now.strftime("%m/%d/%Y")
 
 @app.route('/')
 @app.route("/login", methods=["GET", "POST"])
@@ -70,6 +75,15 @@ def signup():
             mongo.db.users.insert_one(signup)
             # put the user into session
             session['user'] = request.form.get('username').lower()
+
+            default_settings = {
+                'username': session['user'],
+                'dark_theme': 'on',
+                'light_theme': ''
+            }
+
+            mongo.db.user_settings.insert_one(default_settings)
+
             flash('Registered Successfully')
             return redirect(url_for('home'))
         else:
@@ -84,82 +98,88 @@ def support():
 
 @app.route('/home', methods=["GET", "POST"])
 def home():
-    if session['user']:
-        posts = list(mongo.db.posts.find())
+    if 'user' not in session:
+        flash('You Need To Login First!')
+        return redirect(url_for('login'))
+    else:
+        posts = list(
+            mongo.db.posts.find().sort('date_posted', 1))
 
         if request.method == 'POST':
             username = mongo.db.users.find_one({'username': session['user']})['username']
-            if request.form.get('post-submit'):
-                new_post = {
-                    'description': request.form.get('activity-post'),
-                    'created_by': username
-                }
-                mongo.db.posts.insert_one(new_post)
-                flash('Posted Successfully!')
-                return redirect(url_for('home'))
-            if request.form.get('like'):
-                post = mongo.db.posts.find_one({"_id": ObjectId(post_id)})
 
+            new_post = {
+                'description': request.form.get('activity-post'),
+                'date_posted': current_date,
+                'time_posted': current_time,
+                'created_by': username
+            }
+            mongo.db.posts.insert_one(new_post)
+            flash('Posted Successfully!')
+            return redirect(url_for('home'))
         return render_template('home.html', posts=posts)
-    else:
-        return redirect(url_for('login'))
-        flash('You Need to login first!')
 
+
+@app.route('/like_post/<post_id>', methods=['GET','POST'])
+def like_post(post_id):
+    mongo.db.posts.find_one_and_update(
+        {'_id': ObjectId(post_id)}, {'$inc': {'likes': 1}})
 
 @app.route('/search')
 def search():
-    if session['user']:
-        return render_template('search.html')
-    else:
+    if 'user' not in session:
+        flash('You Need To Login First!')
         return redirect(url_for('login'))
-        flash('You Need to login first!')
+    else:
+        return render_template('search.html')
 
 @app.route('/news_feed')
 def news_feed():
-    if session['user']:
-        return render_template('news_feed.html')
-    else:
+    if 'user' not in session:
+        flash('You Need To Login First!')
         return redirect(url_for('login'))
-        flash('You Need to login first!')
+    else:
+        return render_template('news_feed.html')
 
 
 @app.route('/notifications')
 def notifications():
-    if session['user']:
-        return render_template('notifications.html')
-    else:
+    if 'user' not in session:
+        flash('You Need To Login First!')
         return redirect(url_for('login'))
-        flash('You Need to login first!')
+    else:
+        return render_template('notifications.html')
 
 
 @app.route('/friends')
 def friends():
-    if session['user']:
-        return render_template('friends.html')
-    else:
+    if 'user' not in session:
+        flash('You Need To Login First!')
         return redirect(url_for('login'))
-        flash('You Need to login first!')
+    else:
+        return render_template('friends.html')
 
 
 @app.route('/settings', methods=['GET', 'POST'])
 def settings():
-    if session['user']:
-        # for the themes add if statements in the base url to check the user settings and display specific css
+    if 'user' not in session:
+        flash('You Need To Login First!')
+        return redirect(url_for('login'))
+    else:
+    # for the themes add if statements in the base url to check the user settings and display specific css
         if request.method == 'POST':
-            username = mongo.db.users.find_one({'username': session['user']})['username']
 
             settings = {
+                'username': session['user'],
                 'dark_theme': request.form.get('dark_theme'),
                 'light_theme': request.form.get('light_theme')
             }
 
-            mongo.db.user_settings.update({"username": username}, settings)
+            mongo.db.user_settings.update({"username": session['user']}, settings)
 
             flash('Settings Updated')
         return render_template('settings.html')
-    else:
-        return redirect(url_for('login'))
-        flash('You Need to login first!')
+
 
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),

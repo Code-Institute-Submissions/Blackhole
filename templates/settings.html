@@ -1,43 +1,38 @@
-{% extends 'base.html' %}
-{% block styles %}
-{% endblock %}
-{% block content %}
+{% extends 'base.html' %} {% block styles %} {% endblock %} {% block content %}
 <section id="settings" class="row">
     <div class="col s3"></div>
-        <!--SETTINGS -->
-        <div class="input-field col s6">
+    <!--SETTINGS -->
+    <div class="input-field col s6">
         <form method="POST" action="{{ url_for ('settings') }}">
-        <!-- THEME SECTION -->
-        <div id="themes" class="sub-title">
-            <h3>Themes</h3>
-            <hr class="sub-sec-divide">
-            <!-- DARK THEME -->
-            <div class="switch">
-                <label for="dark_theme">
-                Dark Theme
-                <input type="checkbox" id="dark_theme" name="dark_theme">
-                <span id="dark_switch" class="lever right"></span>
-                </label>
+            <!-- THEME SECTION -->
+            <div id="themes" class="sub-title">
+                <h3>Themes</h3>
+                <hr class="sub-sec-divide">
+                <!-- DARK THEME -->
+                <div class="switch">
+                    <label for="dark_theme">
+                        Dark Theme
+                        <input type="checkbox" id="dark_theme" name="dark_theme">
+                        <span id="dark_switch" class="lever right"></span>
+                    </label>
+                </div>
+                <hr class="item-divide">
+                <!-- LIGHT THEME -->
+                <div class="switch">
+                    <label for="light_theme">
+                        Light Theme
+                        <input type="checkbox" id="light_theme" name="light_theme">
+                        <span id="light_switch" class="lever right"></span>
+                    </label>
+                </div>
             </div>
-            <hr class="item-divide">
-            <!-- LIGHT THEME -->
-            <div class="switch">
-                <label for="light_theme">
-                Light Theme
-                <input type="checkbox" id="light_theme" name="light_theme" checked>
-                <span id="light_switch" class="lever right"></span>
-                </label>
+            <!-- SAVE / RESET SETTINGS BUTTON -->
+            <div id="settings-buttons">
+                <button type="submit" id="reset" class="btn" name="reset">Reset</button>
+                <button type="submit" id="save" class="btn" name="save">Save</button>
             </div>
-        </div>
-        <!-- SAVE / RESET SETTINGS BUTTON -->
-    <div id="settings-buttons">
-        <button type="submit" id="reset" class="btn" name="reset">Reset</button>
-        <button type="submit" id="save" class="btn" name="save">Save</button>
-    </div>
-    
         </form>
-        </div>
+    </div>
     <div class="col s3"></div>
-    
 </section>
 {% endblock %}
