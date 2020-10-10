@@ -20,6 +20,12 @@ $(document).on('click', '#mentions-post-icon', function() {
     $('#mentions-post').click();
 })
 
-if ($('#dark_theme') == checked ) {
+// SETTINGS THEMES SWITCHES
+
+$(document).on('click', '#dark_switch', function() {
     $('#light_theme').prop('checked', false);
-}
+})
+
+$(document).on('click', '#light_switch', function() {
+    $('#dark_theme').prop('checked', false);
+})

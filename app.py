@@ -84,49 +84,82 @@ def support():
 
 @app.route('/home', methods=["GET", "POST"])
 def home():
-    posts = list(mongo.db.posts.find())
+    if session['user']:
+        posts = list(mongo.db.posts.find())
 
-    if request.method == 'POST':
-        username = mongo.db.users.find_one({'username': session['user']})['username']
-        if request.form.get('post-submit'):
-            new_post = {
-                'description': request.form.get('activity-post'),
-                'created_by': username
-            }
-            mongo.db.posts.insert_one(new_post)
-            flash('Posted Successfully!')
-            return redirect(url_for('home'))
-        if request.form.get('like'):
-            post = mongo.db.posts.find_one({"_id": ObjectId(post_id)})
-        
-    return render_template('home.html', posts=posts)
+        if request.method == 'POST':
+            username = mongo.db.users.find_one({'username': session['user']})['username']
+            if request.form.get('post-submit'):
+                new_post = {
+                    'description': request.form.get('activity-post'),
+                    'created_by': username
+                }
+                mongo.db.posts.insert_one(new_post)
+                flash('Posted Successfully!')
+                return redirect(url_for('home'))
+            if request.form.get('like'):
+                post = mongo.db.posts.find_one({"_id": ObjectId(post_id)})
+
+        return render_template('home.html', posts=posts)
+    else:
+        return redirect(url_for('login'))
+        flash('You Need to login first!')
 
 
 @app.route('/search')
 def search():
-    return render_template('search.html')
-
+    if session['user']:
+        return render_template('search.html')
+    else:
+        return redirect(url_for('login'))
+        flash('You Need to login first!')
 
 @app.route('/news_feed')
 def news_feed():
-    return render_template('news_feed.html')
+    if session['user']:
+        return render_template('news_feed.html')
+    else:
+        return redirect(url_for('login'))
+        flash('You Need to login first!')
 
 
 @app.route('/notifications')
 def notifications():
-    return render_template('notifications.html')
+    if session['user']:
+        return render_template('notifications.html')
+    else:
+        return redirect(url_for('login'))
+        flash('You Need to login first!')
 
 
 @app.route('/friends')
 def friends():
-    return render_template('friends.html')
+    if session['user']:
+        return render_template('friends.html')
+    else:
+        return redirect(url_for('login'))
+        flash('You Need to login first!')
 
 
-@app.route('/settings')
+@app.route('/settings', methods=['GET', 'POST'])
 def settings():
-    # for the themes add if statements in the base url to check the user settings and display specific css
-    return render_template('settings.html')
+    if session['user']:
+        # for the themes add if statements in the base url to check the user settings and display specific css
+        if request.method == 'POST':
+            username = mongo.db.users.find_one({'username': session['user']})['username']
 
+            settings = {
+                'dark_theme': request.form.get('dark_theme'),
+                'light_theme': request.form.get('light_theme')
+            }
+
+            mongo.db.user_settings.update({"username": username}, settings)
+
+            flash('Settings Updated')
+        return render_template('settings.html')
+    else:
+        return redirect(url_for('login'))
+        flash('You Need to login first!')
 
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
