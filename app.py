@@ -2,10 +2,15 @@ import os
 from flask import (
     Flask, flash, render_template,
     redirect, request, session, url_for)
+
 from flask_pymongo import PyMongo
+
 from bson.objectid import ObjectId
+
 from werkzeug.security import generate_password_hash, check_password_hash
-from datetime import date, datetime, time
+
+from datetime import date, datetime
+
 if os.path.exists('env.py'):
     import env
 
@@ -102,6 +107,13 @@ def home():
         flash('You Need To Login First!')
         return redirect(url_for('login'))
     else:
+        styles = mongo.db.user_settings.find_one({'username': session['user']})
+        if styles.light_theme == '':
+#            styles = 'light_theme'
+ #       else:
+  #          styles = 'dark_theme'
+            print(styles)
+
         posts = list(
             mongo.db.posts.find().sort('date_posted', 1))
 
@@ -117,10 +129,10 @@ def home():
             mongo.db.posts.insert_one(new_post)
             flash('Posted Successfully!')
             return redirect(url_for('home'))
-        return render_template('home.html', posts=posts)
+        return render_template('home.html', posts=posts, styles=styles)
 
 
-@app.route('/like_post/<post_id>', methods=['GET','POST'])
+@app.route('/like_post/<post_id>', methods=['GET', 'POST'])
 def like_post(post_id):
     mongo.db.posts.find_one_and_update(
         {'_id': ObjectId(post_id)}, {'$inc': {'likes': 1}})

@@ -1,3 +1,5 @@
+// CALENDAR FOR DOB ON SIGN UP
+
 $(document).ready(function(){
     $('.datepicker').datepicker({
         format: 'dd mmmm, yyyy',
@@ -5,8 +7,12 @@ $(document).ready(function(){
         autoClose: true,
         yearRange: 100,
     });
-    $('.sidenav').sidenav();
 });
+
+// IMAGE PREVIEW UPON UPLOAD
+
+
+// POP OUT MENUS AND ACTIVATION
 
 $(document).on('click', '#profile-pop-out-icon', function() {
     $('#profile-pop-out-section').toggle();
