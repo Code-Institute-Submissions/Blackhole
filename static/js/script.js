@@ -7,6 +7,7 @@ $(document).ready(function(){
         autoClose: true,
         yearRange: 100,
     });
+    $('.modal').modal();
 });
 
 // IMAGE PREVIEW UPON UPLOAD

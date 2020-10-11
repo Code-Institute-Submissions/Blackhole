@@ -113,17 +113,12 @@ def home():
         else:
             home = 'light_home.html'
 
-        post = list(
-            mongo.db.posts.find())
+        posts = list(mongo.db.posts.find().sort([('_id', -1)]))
 
-        post_date = sorted(post, reverse=True, key=lambda each_dict: datetime.strptime(
-            each_dict['date_posted'], '%d/%m/%Y'), datetime.strptime(
-            each_dict['time_posted'], '%H:%M'))
-
-        post_id = mongo.db.post.find({'_id': ObjectId})
-
+        # post_id = mongo.db.post.find({'_id': ObjectId()})
         if request.method == 'POST':
-            username = mongo.db.users.find_one({'username': session['user']})['username']
+            username = mongo.db.users.find_one(
+                {'username': session['user']})['username']
 
             new_post = {
                 'description': request.form.get('activity-post'),
@@ -135,7 +130,7 @@ def home():
             mongo.db.posts.insert_one(new_post)
             flash('Posted Successfully!')
             return redirect(url_for('home'))
-        return render_template(home, posts=posts, post_id=post_id)
+        return render_template(home, posts=posts)
 
 
 @app.route('/like_post/<post_id>', methods=['GET', 'POST'])
@@ -143,6 +138,32 @@ def like_post(post_id):
     mongo.db.posts.find_one_and_update(
         {'_id': ObjectId(post_id)},  {'$inc': {'likes': 1}})
     return redirect(url_for('home'))
+
+
+@app.route('/delete_post/<post_id>', methods=['GET', 'POST'])
+def delete_post(post_id):
+    if 'user' not in session:
+        flash('You Need To Login First!')
+        return redirect(url_for('login'))
+    else:
+
+        mongo.db.posts.remove({'_id': ObjectId(post_id)})
+
+        return redirect(url_for('home'))
+
+
+@app.route('/edit_post/<post_id>', methods=['GET', 'POST'])
+def edit_post(post_id):
+    if 'user' not in session:
+        flash('You Need To Login First!')
+        return redirect(url_for('login'))
+    else:
+        style = mongo.db.user_settings.find_one({'username': session['user']})['dark_theme']
+        if style == 'on':
+            edit_post = 'edit_post.html'
+        else:
+            edit_post = 'light_edit_post.html'
+        return render_template(edit_post, post_id=post_id)
 
 
 @app.route('/search')
