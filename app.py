@@ -107,12 +107,11 @@ def home():
         flash('You Need To Login First!')
         return redirect(url_for('login'))
     else:
-        styles = mongo.db.user_settings.find_one({'username': session['user']})
-        if styles.light_theme == '':
-#            styles = 'light_theme'
- #       else:
-  #          styles = 'dark_theme'
-            print(styles)
+        style = mongo.db.user_settings.find_one({'username': session['user']})['dark_theme']
+        if style == 'on':
+            home = 'home.html'
+        else:
+            home = 'light_home.html'
 
         posts = list(
             mongo.db.posts.find().sort('date_posted', 1))
@@ -129,7 +128,7 @@ def home():
             mongo.db.posts.insert_one(new_post)
             flash('Posted Successfully!')
             return redirect(url_for('home'))
-        return render_template('home.html', posts=posts, styles=styles)
+        return render_template(home, posts=posts)
 
 
 @app.route('/like_post/<post_id>', methods=['GET', 'POST'])
@@ -143,7 +142,12 @@ def search():
         flash('You Need To Login First!')
         return redirect(url_for('login'))
     else:
-        return render_template('search.html')
+        style = mongo.db.user_settings.find_one({'username': session['user']})['dark_theme']
+        if style == 'on':
+            search = 'search.html'
+        else:
+            search = 'light_search.html'
+        return render_template(search)
 
 @app.route('/news_feed')
 def news_feed():
@@ -151,7 +155,12 @@ def news_feed():
         flash('You Need To Login First!')
         return redirect(url_for('login'))
     else:
-        return render_template('news_feed.html')
+        style = mongo.db.user_settings.find_one({'username': session['user']})['dark_theme']
+        if style == 'on':
+            news_feed = 'news_feed.html'
+        else:
+            news_feed = 'light_news_feed.html'
+        return render_template(news_feed)
 
 
 @app.route('/notifications')
@@ -160,7 +169,12 @@ def notifications():
         flash('You Need To Login First!')
         return redirect(url_for('login'))
     else:
-        return render_template('notifications.html')
+        style = mongo.db.user_settings.find_one({'username': session['user']})['dark_theme']
+        if style == 'on':
+            notifications = 'notifications.html'
+        else:
+            notifications = 'light_notifications.html'
+        return render_template(notifications)
 
 
 @app.route('/friends')
@@ -169,7 +183,12 @@ def friends():
         flash('You Need To Login First!')
         return redirect(url_for('login'))
     else:
-        return render_template('friends.html')
+        style = mongo.db.user_settings.find_one({'username': session['user']})['dark_theme']
+        if style == 'on':
+            friends = 'friends.html'
+        else:
+            friends = 'light_friends.html'
+        return render_template(friends)
 
 
 @app.route('/settings', methods=['GET', 'POST'])
@@ -179,6 +198,11 @@ def settings():
         return redirect(url_for('login'))
     else:
     # for the themes add if statements in the base url to check the user settings and display specific css
+        style = mongo.db.user_settings.find_one({'username': session['user']})['dark_theme']
+        if style == 'on':
+            settings_html = 'settings.html'
+        else:
+            settings_html = 'light_settings.html'
         if request.method == 'POST':
 
             settings = {
@@ -190,7 +214,8 @@ def settings():
             mongo.db.user_settings.update({"username": session['user']}, settings)
 
             flash('Settings Updated')
-        return render_template('settings.html')
+            return redirect('settings')
+        return render_template(settings_html)
 
 
 if __name__ == "__main__":
