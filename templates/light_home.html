@@ -5,7 +5,7 @@
 {% block content %}
 <section class="row">
     <!-- PROFILE SECTION -->
-    <div id="profile-home" class="col s2 m4 l3 side-view grey darken-4">
+    <div id="profile-home" class="col s2 m4 l3 side-view">
         <div class="contain">
             <div id="home-mobile-side-nav">
                 <div id="profile-pop-out">
@@ -22,7 +22,7 @@
             <form id="new-post" method="POST" action="{{ url_for('home') }}">
                 <div class="input-field post col s12">
                     <!-- IMAGE PREVIEW ON UPLOAD -->
-                    <div>
+                    <div id="image_preview">
                         <input type="file" name="inpFile" id="inpFile">
                         <img id="imgPreview" src="" alt="Image Preview" class="image-preview__image">
                         <div class="image-preview" id="imagePreview">
@@ -53,7 +53,7 @@
                 </div>
                 <hr>
                 <div class="post-interactivity">
-                            <a href="{{ url_for('like_post', post_id=post._id) }}" name="like"><i class="fas fa-heart"></i></a>
+                            <a href="{{ url_for('like_post', post_id=post._id) }}" name="like"><i class="fas fa-heart"></i></a> - {{ post.likes }}
                             {% if post.created_by == session.user %}
                                 <a href="{{ url_for('edit_post', post_id=post._id) }}" name="edit"><i class="fas fa-pencil-alt right"></i></a>
                                 <a class="modal-trigger" href="#{{post._id}}"><i class="fas fa-trash-alt right"></i></a>
@@ -74,7 +74,7 @@
         </div>
     </div>
     <!-- FRIENDS -->
-    <div id="friends-list" class="col s0 m0 l3 side-view grey darken-4">
+    <div id="friends-list" class="col s0 m0 l3 side-view">
         <div class=" contain">
             TEST
         </div>

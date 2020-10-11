@@ -1,3 +1,78 @@
 body {
     background-color: black;
+    color: #ffffff;
+}
+
+/* NAV MENU */
+
+.nav-wrapper h1,
+.nav-wrapper a{
+    color: #0277bd;
+}
+
+.nav-wrapper a {
+    font-size: 1em;
+}
+
+/* SIDE MENUS */
+
+.side-view {
+    background-color: #212121;
+    border-top: solid 2px #01579b;
+    height: 100px;
+}
+
+/* POSTING AND POSTED */
+
+/* POSTING */
+
+#activity {
+    border: solid 2px #01579b;
+    border-top: none;
+}
+
+#activity .input-field{
+    border: none;
+}
+
+#activity .input-field .btn {
+    background-color: transparent;
+    color: #01579b;
+    font-size: 1.5em;
+}
+
+#activity #image_preview {
+    display: none;
+}
+
+/* POSTING */
+
+#activity .posted {
+    border: none;
+    border-radius: 5px;
+    background-color: #414141;
+    padding-top: 0.5em;
+}
+
+#activity .post-content {
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+
+#activity .posted hr {
+    width: 100%;
+    background-color: #01579b;
+    border: none;
+    height: 1px;
+}
+
+/* POST INTERACT */
+
+#activity .posted a {
+    color: #0277bd;
+    text-decoration: none;
+}
+
+#activity .posted i {
+    padding-bottom: 0.5em;
 }
