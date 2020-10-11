@@ -25,8 +25,8 @@ mongo = PyMongo(app)
 app.config['cloud_name'] = os.environ.get('cloud_name')
 
 now = datetime.now()
-current_time = now.strftime("%H:%M:%S")
-current_date = date_time = now.strftime("%m/%d/%Y")
+current_time = now.strftime("%H:%M")
+current_date = date_time = now.strftime("%d/%m/%Y")
 
 @app.route('/')
 @app.route("/login", methods=["GET", "POST"])
@@ -113,8 +113,14 @@ def home():
         else:
             home = 'light_home.html'
 
-        posts = list(
-            mongo.db.posts.find().sort('date_posted', 1))
+        post = list(
+            mongo.db.posts.find())
+
+        post_date = sorted(post, reverse=True, key=lambda each_dict: datetime.strptime(
+            each_dict['date_posted'], '%d/%m/%Y'), datetime.strptime(
+            each_dict['time_posted'], '%H:%M'))
+
+        post_id = mongo.db.post.find({'_id': ObjectId})
 
         if request.method == 'POST':
             username = mongo.db.users.find_one({'username': session['user']})['username']
@@ -123,18 +129,21 @@ def home():
                 'description': request.form.get('activity-post'),
                 'date_posted': current_date,
                 'time_posted': current_time,
+                'likes': 0,
                 'created_by': username
             }
             mongo.db.posts.insert_one(new_post)
             flash('Posted Successfully!')
             return redirect(url_for('home'))
-        return render_template(home, posts=posts)
+        return render_template(home, posts=posts, post_id=post_id)
 
 
 @app.route('/like_post/<post_id>', methods=['GET', 'POST'])
 def like_post(post_id):
     mongo.db.posts.find_one_and_update(
-        {'_id': ObjectId(post_id)}, {'$inc': {'likes': 1}})
+        {'_id': ObjectId(post_id)},  {'$inc': {'likes': 1}})
+    return redirect(url_for('home'))
+
 
 @app.route('/search')
 def search():
