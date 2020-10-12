@@ -23,6 +23,10 @@ nav .brand-logo {
   height: 64px;
 }
 
+.nav-wrapper a {
+    font-size: 1em;
+}
+
 /* FLASHES */
 
 .flashes > h3 {
@@ -31,19 +35,91 @@ nav .brand-logo {
 
 /* POSTS AND POSTING */
 
+/* POSTING */
+
+
+#activity .input-field {
+    border: none;
+}
+
+#activity .input-field .btn {
+    background-color: transparent;
+    font-size: 1.5em;
+}
+
+#activity #image_preview {
+    display: none;
+}
+
+
 #activity #label-post {
     padding-top: 1em;
 }
 
 #activity .post {
-    border: solid 2px;
-    border-radius: 5px;
     padding-top: 2em;
 }
 
-.posted {
+/* POSTED */
+
+#activity .posted {
     overflow-wrap: anywhere;
+    border: none;
+    border-radius: 5px;
+    padding-top: 0.5em;
+    margin-bottom: 1em;
     margin-top: 1em;
+}
+
+#activity h5 {
+    margin: 9.5px;
+}
+
+#activity .post-info {
+    float:right;
+}
+
+#activity .posted hr {
+    width: 100%;
+    border: none;
+    height: 1px;
+}
+
+#activity .post-content {
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+
+/* POST INTERACTIVITY */
+
+.post-interactivity {
+    margin: 9.5px;
+}
+
+#activity .posted a {
+    text-decoration: none;
+}
+
+#activity .posted i {
+    padding-bottom: 0.5em;
+}
+
+/* MODAL POP UP FOR DELETING A POST */
+
+.modal {
+    text-align: center;
+}
+
+.modal .modal-footer {
+    border-top: 2px solid;
+}
+
+.modal .modal-footer .delete {
+    margin-right: 25%;
+}
+
+.modal .modal-footer .cancel {
+    margin-left: 25%;
 }
 
 /* POP OUTS AND POP OUT ICONS */
