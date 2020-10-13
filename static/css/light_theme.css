@@ -1,6 +1,6 @@
 body {
     background-color: white;
-    color: #212121;
+    color: black;
 }
 
 /* NAV MENU */
@@ -16,20 +16,20 @@ nav .nav-wrapper {
 
 .nav-wrapper h1,
 .nav-wrapper a{
-    color: #01579b;
+    color: #0277bd;
 }
 
 /* FLASH MESSAGES */
 
 .flashes h3 {
-    color: #01579b;
+    color: #0277bd;
 }
 
 /* SIDE MENUS */
 
 .side-view {
     background-color: #dfdfdf;
-    border-top: solid 2px #01579b;
+    border-top: solid 2px #0277bd;
     height: 100px;
 }
 
@@ -38,19 +38,19 @@ nav .nav-wrapper {
 /* POSTING */
 
 #activity {
-    border: solid 2px #01579b;
+    border: solid 2px #0277bd;
     border-top: none;
 }
 
 
 #activity #label-post,
 #activity #activity-post {
-    color: #01579b;
-    border-color: #01579b;
+    color: #0277bd;
+    border-color: #0277bd;
 }
 
 #activity .input-field .btn {
-    color: #01579b;
+    color: #0277bd;
     box-shadow: none;
     -webkit-box-shadow: none;
 }
@@ -62,31 +62,31 @@ nav .nav-wrapper {
 }
 
 #activity h5 {
-    color: #01579b
+    color: #0277bd
 }
 
 #activity .posted hr {
-    background-color: #01579b;
+    background-color: #0277bd;
 }
 
 /* POST INTERACT */
 
 #activity .posted a {
-    color: #01579b;
+    color: #0277bd;
 }
 
 /* MODAL POP UP FOR DELETING A POST */
 
 .modal {
     background-color: #dfdfdf;
-    color: #01579b;
+    color: #0277bd;
 }
 
 /* MODAL FOOTER */
 
 .modal .modal-footer {
     background-color: #dfdfdf;
-    border-color:#01579b;
+    border-color:#0277bd;
 }
 
 /* MODAL FOOTER BUTTONS */
