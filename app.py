@@ -1,4 +1,6 @@
 import os
+import sys
+
 from flask import (
     Flask, flash, render_template,
     redirect, request, session, url_for)
@@ -10,6 +12,10 @@ from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
 
 from datetime import datetime
+
+from cloudinary.api import delete_resources_by_tag, resources_by_tag, cloudinary
+from cloudinary.uploader import upload
+from cloudinary.utils import cloudinary_url
 
 if os.path.exists('env.py'):
     import env
@@ -24,9 +30,14 @@ mongo = PyMongo(app)
 
 app.config['cloud_name'] = os.environ.get('cloud_name')
 
+DEFAULT_TAG = "blackhole"
+
 now = datetime.now()
 current_time = now.strftime("%H:%M")
-current_date = date_time = now.strftime("%d/%m/%Y")
+current_date = now.strftime("%d/%m/%Y")
+timeUpload = now.strftime("%H%M%S")
+dateUpload = now.strftime('%D%M%Y')
+timeDateUpload = dateUpload + timeUpload
 
 
 @app.route('/')
@@ -133,6 +144,16 @@ def home():
                     'likes': 0,
                     'created_by': username
                 }
+
+                photo_id = username + timeDateUpload
+                print(photo_id)
+
+                cloudinary.uploader.upload(
+                    request.form.get('inpFile'),
+                    public_id=photo_id,
+                    file='auto',
+                )
+
                 mongo.db.posts.insert_one(new_post)
                 flash('Posted Successfully!')
                 return redirect(url_for('home'))
