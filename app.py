@@ -9,7 +9,7 @@ from bson.objectid import ObjectId
 
 from werkzeug.security import generate_password_hash, check_password_hash
 
-from datetime import date, datetime
+from datetime import datetime
 
 if os.path.exists('env.py'):
     import env
@@ -27,6 +27,7 @@ app.config['cloud_name'] = os.environ.get('cloud_name')
 now = datetime.now()
 current_time = now.strftime("%H:%M")
 current_date = date_time = now.strftime("%d/%m/%Y")
+
 
 @app.route('/')
 @app.route("/login", methods=["GET", "POST"])
@@ -75,7 +76,8 @@ def signup():
                 "email": request.form.get('email').lower(),
                 "DOB": request.form.get('DOB'),
                 "phone_number": request.form.get('phone_number'),
-                "password": generate_password_hash(request.form.get('password'))
+                "password": generate_password_hash(
+                    request.form.get('password'))
             }
             mongo.db.users.insert_one(signup)
             # put the user into session
@@ -107,7 +109,8 @@ def home():
         flash('You Need To Login First!')
         return redirect(url_for('login'))
     else:
-        style = mongo.db.user_settings.find_one({'username': session['user']})['dark_theme']
+        style = mongo.db.user_settings.find_one(
+            {'username': session['user']})['dark_theme']
         if style == 'on':
             home = 'home.html'
         else:
@@ -117,19 +120,22 @@ def home():
 
         # post_id = mongo.db.post.find({'_id': ObjectId()})
         if request.method == 'POST':
-            username = mongo.db.users.find_one(
-                {'username': session['user']})['username']
+            if request.form.get('activity-post') == '':
+                flash('You Need To Write Something To Post!')
+            else:
+                username = mongo.db.users.find_one(
+                    {'username': session['user']})['username']
 
-            new_post = {
-                'description': request.form.get('activity-post'),
-                'date_posted': current_date,
-                'time_posted': current_time,
-                'likes': 0,
-                'created_by': username
-            }
-            mongo.db.posts.insert_one(new_post)
-            flash('Posted Successfully!')
-            return redirect(url_for('home'))
+                new_post = {
+                    'description': request.form.get('activity-post'),
+                    'date_posted': current_date,
+                    'time_posted': current_time,
+                    'likes': 0,
+                    'created_by': username
+                }
+                mongo.db.posts.insert_one(new_post)
+                flash('Posted Successfully!')
+                return redirect(url_for('home'))
         return render_template(home, posts=posts)
 
 
@@ -158,7 +164,8 @@ def edit_post(post_id):
         flash('You Need To Login First!')
         return redirect(url_for('login'))
     else:
-        style = mongo.db.user_settings.find_one({'username': session['user']})['dark_theme']
+        style = mongo.db.user_settings.find_one(
+            {'username': session['user']})['dark_theme']
         if style == 'on':
             edit_post = 'edit_post.html'
         else:
@@ -172,12 +179,14 @@ def search():
         flash('You Need To Login First!')
         return redirect(url_for('login'))
     else:
-        style = mongo.db.user_settings.find_one({'username': session['user']})['dark_theme']
+        style = mongo.db.user_settings.find_one(
+            {'username': session['user']})['dark_theme']
         if style == 'on':
             search = 'search.html'
         else:
             search = 'light_search.html'
         return render_template(search)
+
 
 @app.route('/news_feed')
 def news_feed():
@@ -185,7 +194,8 @@ def news_feed():
         flash('You Need To Login First!')
         return redirect(url_for('login'))
     else:
-        style = mongo.db.user_settings.find_one({'username': session['user']})['dark_theme']
+        style = mongo.db.user_settings.find_one(
+            {'username': session['user']})['dark_theme']
         if style == 'on':
             news_feed = 'news_feed.html'
         else:
@@ -199,7 +209,8 @@ def notifications():
         flash('You Need To Login First!')
         return redirect(url_for('login'))
     else:
-        style = mongo.db.user_settings.find_one({'username': session['user']})['dark_theme']
+        style = mongo.db.user_settings.find_one(
+            {'username': session['user']})['dark_theme']
         if style == 'on':
             notifications = 'notifications.html'
         else:
@@ -213,7 +224,8 @@ def friends():
         flash('You Need To Login First!')
         return redirect(url_for('login'))
     else:
-        style = mongo.db.user_settings.find_one({'username': session['user']})['dark_theme']
+        style = mongo.db.user_settings.find_one(
+            {'username': session['user']})['dark_theme']
         if style == 'on':
             friends = 'friends.html'
         else:
@@ -228,7 +240,8 @@ def settings():
         return redirect(url_for('login'))
     else:
     # for the themes add if statements in the base url to check the user settings and display specific css
-        style = mongo.db.user_settings.find_one({'username': session['user']})['dark_theme']
+        style = mongo.db.user_settings.find_one(
+            {'username': session['user']})['dark_theme']
         if style == 'on':
             settings_html = 'settings.html'
         else:
@@ -241,7 +254,8 @@ def settings():
                 'light_theme': request.form.get('light_theme')
             }
 
-            mongo.db.user_settings.update({"username": session['user']}, settings)
+            mongo.db.user_settings.update(
+                {"username": session['user']}, settings)
 
             flash('Settings Updated')
             return redirect('settings')

@@ -1,3 +1,96 @@
 body {
-    background-color: pink;
+    background-color: white;
+    color: #212121;
+}
+
+/* NAV MENU */
+
+nav {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+nav .nav-wrapper {
+    background-color: white;
+}
+
+.nav-wrapper h1,
+.nav-wrapper a{
+    color: #01579b;
+}
+
+/* FLASH MESSAGES */
+
+.flashes h3 {
+    color: #01579b;
+}
+
+/* SIDE MENUS */
+
+.side-view {
+    background-color: #dfdfdf;
+    border-top: solid 2px #01579b;
+    height: 100px;
+}
+
+/* POSTING AND POSTED */
+
+/* POSTING */
+
+#activity {
+    border: solid 2px #01579b;
+    border-top: none;
+}
+
+
+#activity #label-post,
+#activity #activity-post {
+    color: #01579b;
+    border-color: #01579b;
+}
+
+#activity .input-field .btn {
+    color: #01579b;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+}
+
+/* POSTED */
+
+#activity .posted {
+    background-color: #dfdfdf;
+}
+
+#activity h5 {
+    color: #01579b
+}
+
+#activity .posted hr {
+    background-color: #01579b;
+}
+
+/* POST INTERACT */
+
+#activity .posted a {
+    color: #01579b;
+}
+
+/* MODAL POP UP FOR DELETING A POST */
+
+.modal {
+    background-color: #dfdfdf;
+    color: #01579b;
+}
+
+/* MODAL FOOTER */
+
+.modal .modal-footer {
+    background-color: #dfdfdf;
+    border-color:#01579b;
+}
+
+/* MODAL FOOTER BUTTONS */
+
+.modal .modal-footer .cancel {
+    background-color: #3e3e3e;;
 }

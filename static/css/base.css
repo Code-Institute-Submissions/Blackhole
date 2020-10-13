@@ -20,7 +20,13 @@ nav .brand-logo {
 #nav-mobile {
   display: flex;
   justify-content: space-between;
-  height: 64px;
+  height: 56px;
+}
+
+@media screen and (min-width: 600px) {
+    #nav-mobile {
+        height: 64px;
+    }
 }
 
 .nav-wrapper a {
@@ -79,6 +85,20 @@ nav .brand-logo {
     float:right;
 }
 
+#activity .post-title br {
+    display: none;
+}
+
+@media screen and (max-width: 600px) {
+    #activity .post-title br {
+    display: block;
+    }
+
+    #activity .post-info {
+        float: none;
+    }
+}
+
 #activity .posted hr {
     width: 100%;
     border: none;
@@ -120,6 +140,17 @@ nav .brand-logo {
 
 .modal .modal-footer .cancel {
     margin-left: 25%;
+}
+
+@media screen and (max-width:600px) {
+    .modal .modal-footer .delete {
+    margin-right: 10%;
+}
+
+.modal .modal-footer .cancel {
+    margin-left: 10%;
+}
+
 }
 
 /* POP OUTS AND POP OUT ICONS */

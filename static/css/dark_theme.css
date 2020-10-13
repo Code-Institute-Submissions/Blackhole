@@ -5,6 +5,10 @@ body {
 
 /* NAV MENU */
 
+.nav-wrapper {
+    background-color: black;
+}
+
 .nav-wrapper h1,
 .nav-wrapper a{
     color: #0277bd;
@@ -71,7 +75,15 @@ body {
     color: #0277bd;
 }
 
+/* MODAL FOOTER */
+
 .modal .modal-footer {
     background-color: #212121;
     border-color:#0277bd;
+}
+
+/* MODAL FOOTER BUTTONS */
+
+.modal .modal-footer .cancel {
+    background-color: #3e3e3e;;
 }
