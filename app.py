@@ -70,6 +70,8 @@ def login():
 
 @app.route('/logout')
 def logout():
+    flash('You have been logged out!')
+    session.pop('user')
     return redirect('login')
 
 
@@ -196,7 +198,10 @@ def edit_post(post_id):
             edit_post = 'edit_post.html'
         else:
             edit_post = 'light_edit_post.html'
-        return render_template(edit_post, post_id=post_id)
+
+        post = mongo.db.tasks.find_one({"_id": ObjectId(post_id)})
+
+        return render_template(edit_post, post=post)
 
 
 @app.route('/search')

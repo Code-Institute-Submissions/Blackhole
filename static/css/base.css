@@ -196,6 +196,7 @@ nav .brand-logo {
     .profile-pop-out-icon {
     font-size: 34px;
     margin-top: 10px;
+    display: block;
     }
     #friends-list {
         display: none;

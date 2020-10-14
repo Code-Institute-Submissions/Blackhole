@@ -3,5 +3,12 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/dark_theme.css') }}">
 {% endblock %}
 {% block content %}
-EDIT POST
+<div class="row">
+    <div class="col s10 push-1">
+        <div class="col s12">
+            {{ post.created_by }}<br>
+            <span class="post-info">{{ post.time_posted }}{{ post.date_posted }}</span>
+        </div>
+    </div>
+</div>
 {% endblock %}
