@@ -68,6 +68,11 @@ def login():
     return render_template("login.html")
 
 
+@app.route('/logout')
+def logout():
+    return redirect('login')
+
+
 @app.route('/signup', methods=["GET", "POST"])
 def signup():
     if request.method == 'POST':
@@ -209,8 +214,8 @@ def search():
         return render_template(search)
 
 
-@app.route('/news_feed')
-def news_feed():
+@app.route('/messages')
+def messages():
     if 'user' not in session:
         flash('You Need To Login First!')
         return redirect(url_for('login'))
@@ -218,9 +223,9 @@ def news_feed():
         style = mongo.db.user_settings.find_one(
             {'username': session['user']})['dark_theme']
         if style == 'on':
-            news_feed = 'news_feed.html'
+            news_feed = 'messages.html'
         else:
-            news_feed = 'light_news_feed.html'
+            news_feed = 'light_messages.html'
         return render_template(news_feed)
 
 

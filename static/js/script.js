@@ -8,6 +8,7 @@ $(document).ready(function(){
         yearRange: 100,
     });
     $('.modal').modal();
+    $('.tooltipped').tooltip();
 });
 
 // IMAGE PREVIEW UPON UPLOAD
