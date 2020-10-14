@@ -192,16 +192,14 @@ def edit_post(post_id):
         flash('You Need To Login First!')
         return redirect(url_for('login'))
     else:
-        style = mongo.db.user_settings.find_one(
-            {'username': session['user']})['dark_theme']
-        if style == 'on':
-            edit_post = 'edit_post.html'
-        else:
-            edit_post = 'light_edit_post.html'
+        editted_post = {
+            'description': request.form.get('edit-post')
+        }
 
-        post = mongo.db.tasks.find_one({"_id": ObjectId(post_id)})
-
-        return render_template(edit_post, post=post)
+        mongo.db.posts.update(
+            {'_id': ObjectId(post_id)}, editted_post)
+        flash('Post Updated!')
+        return redirect(url_for('home'))
 
 
 @app.route('/search')

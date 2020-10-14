@@ -62,15 +62,17 @@
                 <!-- ALLOWS THE USER TO DELETE, EDIT AND LIKE THE POST -->
                 <div class="post-interactivity">
                     <!-- DISPLAYS THE LIKE BUTTON FOR ALL USERS -->
-                    <a href="{{ url_for('like_post', post_id=post._id) }}" class="likeButton" name="like"><i class="fas fa-heart"></i></a> - {{ post.likes }} {% if post.created_by == session.user %}
-                    <!-- DISPLAYS THE EDIT POST AND DELETE POST JUST FOR THE USERS WHO MADE THE POST -->
-                    <a class="modal-trigger" href="#edit{{post._id}}"><i class="fas fa-pencil-alt right"></i></a>
-                    <a class="modal-trigger" href="#delete{{post._id}}"><i class="fas fa-trash-alt right"></i></a> {% endif %}
+                    <a href="{{ url_for('like_post', post_id=post._id) }}" class="likeButton tooltipped" data-position="bottom" data-tooltip="Like" name="like"><i class="fas fa-heart"></i></a> - {{ post.likes }}
+                    {% if post.created_by == session.user %}
+                        <!-- DISPLAYS THE EDIT POST AND DELETE POST JUST FOR THE USERS WHO MADE THE POST -->
+                        <a class="modal-trigger tooltipped" href="#edit{{post._id}}" data-position="bottom" data-tooltip="Edit" name="edit"><i class="fas fa-pencil-alt right"></i></a>
+                        <a class="modal-trigger tooltipped" href="#delete{{post._id}}" data-position="bottom" data-tooltip="Delete"><i class="fas fa-trash-alt right"></i></a>
+                    {% endif %}
                 </div>
             </div>
             <!-- EDIT MODAL POP UP -->
             <div id="edit{{post._id}}" class="modal">
-                <form>
+                <form method="POST" action="{{ url_for('edit_post', post_id = post_.id) }}">
                 <div class="modal-content">
                     <!-- MODAL POP UP CONTENT -->
                     <h5>Editting A Post</h5>
