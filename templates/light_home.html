@@ -19,7 +19,7 @@
     <!-- ACTIVITY / NEWS FEED -->
     <div id="activity" class="col s10 m8 l6">
         <div class="contain">
-            <form id="new-post" method="POST" action="{{ url_for('home') }}">
+            <form id="new-post" method="POST" action="{{ url_for('home') }}" enctype="multipart/form-data">
                 <div class="input-field post col s12">
                     <!-- IMAGE PREVIEW ON UPLOAD -->
                     <div id="image_preview">
@@ -72,7 +72,7 @@
             </div>
             <!-- EDIT MODAL POP UP -->
             <div id="edit{{post._id}}" class="modal">
-                <form method="POST" action="{{ url_for('edit_post', post_id = post_.id) }}">
+                <form method="POST" action="{{ url_for('edit_post', post_id=post._id) }}">
                 <div class="modal-content">
                     <!-- MODAL POP UP CONTENT -->
                     <h5>Editting A Post</h5>
@@ -90,7 +90,7 @@
                 <div class="modal-footer">
                     <!-- MODAL BUTTONS TO CONFIRM THE EDIT OR CANCEL -->
                     <a href="#" name="cancel" class="modal-close btn left cancel">Cancel</a>
-                    <a href="{{ url_for('edit_post', post_id=post._id) }}" name="edit" class="modal-close btn right edit">Save</a>
+                    <button type="submit" name="edit" class="modal-close btn right edit">Save</button>
                 </div>
                 </form>
             </div>

@@ -36,9 +36,10 @@ now = datetime.now()
 current_time = now.strftime("%H:%M")
 current_date = now.strftime("%d/%m/%Y")
 timeUpload = now.strftime("%H%M%S")
-dateUpload = now.strftime('%D%M%Y')
-timeDateUpload = dateUpload + timeUpload
+dateUpload = now.strftime('%Y%M%S')
+timeDateUpload = "/" + dateUpload + timeUpload
 
+#https://res.cloudinary.com/df-6999/image/upload/v1602729287/r00tacc0unt123/20203326023326.jpg
 
 @app.route('/')
 @app.route("/login", methods=["GET", "POST"])
@@ -154,11 +155,11 @@ def home():
 
                 photo_id = username + timeDateUpload
                 print(photo_id)
+                print(request.files)
 
                 cloudinary.uploader.upload(
-                    request.form.get('inpFile'),
+                    file=request.files.get('image-post'),
                     public_id=photo_id,
-                    file='auto',
                 )
 
                 mongo.db.posts.insert_one(new_post)
@@ -198,6 +199,7 @@ def edit_post(post_id):
 
         mongo.db.posts.update(
             {'_id': ObjectId(post_id)}, editted_post)
+
         flash('Post Updated!')
         return redirect(url_for('home'))
 

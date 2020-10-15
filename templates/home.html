@@ -10,9 +10,9 @@
         <div class="contain">
             <div id="home-mobile-side-nav">
                 <div id="profile-pop-out">
-                    <i class="profile-pop-out-icon fas fa-user-circle tooltipped" data-position="bottom" data-tooltip="Profile"></i>
-                    <i class="profile-pop-out-icon fas fa-comments tooltipped" data-position="bottom" data-tooltip="Friends"></i>
-                    <a href="{{ url_for('logout') }}"><i class="profile-pop-out-icon fas fa-sign-out-alt tooltipped" data-position="bottom" data-tooltip="Log out"></i></a>
+                    <i class="profile-pop-out-icon fas fa-user-circle"></i>
+                    <i class="profile-pop-out-icon fas fa-comments"></i>
+                    <i class="profile-pop-out-icon fas fa-sign-out-alt"></i>
                 </div>
             </div>
         </div>
@@ -20,7 +20,7 @@
     <!-- ACTIVITY / NEWS FEED -->
     <div id="activity" class="col s10 m8 l6">
         <div class="contain">
-            <form id="new-post" method="POST" action="{{ url_for('home') }}">
+            <form id="new-post" method="POST" action="{{ url_for('home') }}" enctype="multipart/form-data">
                 <div class="input-field post col s12">
                     <!-- IMAGE PREVIEW ON UPLOAD -->
                     <div id="image_preview">
@@ -35,9 +35,9 @@
                     <label id="label-post" for="activity-post">Type your new post here:</label>
                     <!-- image upload ( need to add image preview still ) -->
                     <input type="file" name="image-post" id="image-post" hidden="hidden">
-                    <i id="image-post-icon" class="btn fas fa-camera tooltipped" data-position="bottom" data-tooltip="Camera"></i>
+                    <i id="image-post-icon" class="btn fas fa-camera"></i>
                     <!-- mentioning friends on the post which also notifies the friend ( still need to figure out how to do it )-->
-                    <input type="checkbox" name="post-mentions" id="post-mentions" class="tooltipped" data-position="bottom" data-tooltip="Mention">
+                    <input type="checkbox" name="post-mentions" id="post-mentions" hidden>
                     <i id="post-mentions-icon" class="btn fas fa-users"></i>
                     <!-- post submit button -->
                     <button name="post-submit" type="submit" class="btn" style="float:right;"><i class="fas fa-location-arrow"></i></button>
@@ -63,14 +63,40 @@
                 <!-- ALLOWS THE USER TO DELETE, EDIT AND LIKE THE POST -->
                 <div class="post-interactivity">
                     <!-- DISPLAYS THE LIKE BUTTON FOR ALL USERS -->
-                    <a href="{{ url_for('like_post', post_id=post._id) }}" class="likeButton tooltipped" data-position="bottom" data-tooltip="Like" name="like"><i class="fas fa-heart"></i></a> - {{ post.likes }} {% if post.created_by == session.user %}
-                    <!-- DISPLAYS THE EDIT POST AND DELETE POST JUST FOR THE USERS WHO MADE THE POST -->
-                    <a href="{{ url_for('edit_post', post_id=post._id) }}" class="tooltipped" data-position="bottom" data-tooltip="Edit" name="edit"><i class="fas fa-pencil-alt right"></i></a>
-                    <a class="modal-trigger tooltipped" data-position="bottom" data-tooltip="Delete" href="#{{post._id}}"><i class="fas fa-trash-alt right"></i></a> {% endif %}
+                    <a href="{{ url_for('like_post', post_id=post._id) }}" class="likeButton tooltipped" data-position="bottom" data-tooltip="Like" name="like"><i class="fas fa-heart"></i></a> - {{ post.likes }}
+                    {% if post.created_by == session.user %}
+                        <!-- DISPLAYS THE EDIT POST AND DELETE POST JUST FOR THE USERS WHO MADE THE POST -->
+                        <a class="modal-trigger tooltipped" href="#edit{{post._id}}" data-position="bottom" data-tooltip="Edit" name="edit"><i class="fas fa-pencil-alt right"></i></a>
+                        <a class="modal-trigger tooltipped" href="#delete{{post._id}}" data-position="bottom" data-tooltip="Delete"><i class="fas fa-trash-alt right"></i></a>
+                    {% endif %}
                 </div>
             </div>
-            <!-- MODAL POP UP -->
-            <div id="{{post._id}}" class="modal">
+            <!-- EDIT MODAL POP UP -->
+            <div id="edit{{post._id}}" class="modal">
+                <form method="POST" action="{{ url_for('edit_post', post_id=post._id) }}">
+                <div class="modal-content">
+                    <!-- MODAL POP UP CONTENT -->
+                    <h5>Editting A Post</h5>
+                    <div class="row">
+                        <div class="col s12">
+                            <h5>{{ post.created_by }}
+                                <span>
+                                    {{ post.time_posted }} - {{ post.date_posted }}
+                                </span>
+                            </h5>
+                            <textarea id="edit-post" name="edit-post" class="materialize-textarea">{{post.description}}</textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <!-- MODAL BUTTONS TO CONFIRM THE EDIT OR CANCEL -->
+                    <a href="#" name="cancel" class="modal-close btn left cancel">Cancel</a>
+                    <button type="submit" name="edit" class="modal-close btn right edit">Save</button>
+                </div>
+                </form>
+            </div>
+            <!-- DELETE MODAL POP UP -->
+            <div id="delete{{post._id}}" class="modal">
                 <div class="modal-content">
                     <!-- MODAL POP UP CONTENT -->
                     <h5>Are you sure you want to delete this post?</h5>
