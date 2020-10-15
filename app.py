@@ -29,9 +29,9 @@ app.secret_key = os.environ.get('SECRET_KEY')
 mongo = PyMongo(app)
 
 cloudinary.config(
-  cloud_name=os.environ.get('cloud_name'),
-  api_key=os.environ.get('api_key'),
-  api_secret=os.environ.get('api_secret')
+  cloud_name=os.environ.get('CLOUD_NAME'),
+  api_key=os.environ.get('API_KEY'),
+  api_secret=os.environ.get('API_SECRET')
 )
 
 DEFAULT_TAG = "blackhole"
@@ -132,6 +132,7 @@ def home():
         flash('You Need To Login First!')
         return redirect(url_for('login'))
     else:
+        home = ''
         style = mongo.db.user_settings.find_one(
             {'username': session['user']})['dark_theme']
         if style == 'on':
@@ -143,20 +144,26 @@ def home():
 
         # post_id = mongo.db.post.find({'_id': ObjectId()})
         if request.method == 'POST':
-            if request.form.get('activity-post') == '':
-                flash('You Need To Write Something To Post!')
+            if request.files.get('image-post') == '':
+                if request.form.get('activity-post') == '':
+                    flash('You Need To Write Something To Post!')
+                else:
+                    username = mongo.db.users.find_one(
+                        {'username': session['user']})['username']
+                    new_post = {
+                        'description': request.form.get('activity-post'),
+                        'date_posted': current_date,
+                        'time_posted': current_time,
+                        'likes': 0,
+                        'created_by': username
+                    }
+
+                    mongo.db.posts.insert_one(new_post)
+                    flash('Posted Successfully!')
+                    return redirect(url_for('home'))
             else:
                 username = mongo.db.users.find_one(
-                    {'username': session['user']})['username']
-
-                new_post = {
-                    'description': request.form.get('activity-post'),
-                    'date_posted': current_date,
-                    'time_posted': current_time,
-                    'likes': 0,
-                    'created_by': username
-                }
-
+                        {'username': session['user']})['username']
                 photo_id = username + timeDateUpload
                 print(photo_id)
                 print(request.files)
@@ -165,7 +172,14 @@ def home():
                     file=request.files.get('image-post'),
                     public_id=photo_id,
                 )
-
+                new_post = {
+                    'description': request.form.get('activity-post'),
+                    'date_posted': current_date,
+                    'time_posted': current_time,
+                    'likes': 0,
+                    'created_by': username,
+                    'photo_id': photo_id
+                }
                 mongo.db.posts.insert_one(new_post)
                 flash('Posted Successfully!')
                 return redirect(url_for('home'))
@@ -198,10 +212,10 @@ def edit_post(post_id):
         return redirect(url_for('login'))
     else:
         editted_post = {
-            'description': request.form.get('edit-post')
+            'description': request.form.get('edit-post'),
         }
 
-        mongo.db.posts.update(
+        mongo.db.posts.description.update(
             {'_id': ObjectId(post_id)}, editted_post)
 
         flash('Post Updated!')
