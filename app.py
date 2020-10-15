@@ -28,7 +28,11 @@ app.secret_key = os.environ.get('SECRET_KEY')
 
 mongo = PyMongo(app)
 
-app.config['cloud_name'] = os.environ.get('cloud_name')
+cloudinary.config(
+  cloud_name=os.environ.get('cloud_name'),
+  api_key=os.environ.get('api_key'),
+  api_secret=os.environ.get('api_secret')
+)
 
 DEFAULT_TAG = "blackhole"
 
