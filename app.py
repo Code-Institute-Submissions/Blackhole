@@ -131,11 +131,6 @@ def signup():
     return render_template('signup.html')
 
 
-@app.route('/support')
-def support():
-    return render_template('support.html')
-
-
 @app.route('/home', methods=["GET", "POST"])
 def home():
     if 'user' not in session:
@@ -155,7 +150,25 @@ def home():
         # post_id = mongo.db.post.find({'_id': ObjectId()})
         print(request.files)
         if request.method == 'POST':
-            if 'image-post' in request.files:
+            if request.files['image-post'].filename == '':
+                if request.form.get('activity-post') == '':
+                    flash('You Need To Add Something To Post!')
+                else:
+                    username = mongo.db.users.find_one(
+                        {'username': session['user']})['username']
+                    new_post = {
+                        'description': request.form.get('activity-post'),
+                        'date_posted': current_date,
+                        'time_posted': current_time,
+                        'likes': 0,
+                        'photo_id': False,
+                        'created_by': username
+                    }
+
+                    mongo.db.posts.insert_one(new_post)
+                    flash('Posted Successfully!')
+                    return redirect(url_for('home'))
+            else:
                 print(request.files)
                 username = mongo.db.users.find_one(
                         {'username': session['user']})['username']
@@ -180,25 +193,7 @@ def home():
                 mongo.db.posts.insert_one(new_post)
                 flash('Posted Successfully!')
                 return redirect(url_for('home'))
-            else:
-                if request.form.get('activity-post') == '':
-                    flash('You Need To Add Something To Post!')
-                else:
-                    username = mongo.db.users.find_one(
-                        {'username': session['user']})['username']
-                    new_post = {
-                        'description': request.form.get('activity-post'),
-                        'date_posted': current_date,
-                        'time_posted': current_time,
-                        'likes': 0,
-                        'photo_id': False,
-                        'created_by': username
-                    }
 
-                    mongo.db.posts.insert_one(new_post)
-                    flash('Posted Successfully!')
-                    return redirect(url_for('home'))
-                
         return render_template(home, posts=posts)
 
 
@@ -238,21 +233,6 @@ def edit_post(post_id):
         return redirect(url_for('home'))
 
 
-@app.route('/search')
-def search():
-    if 'user' not in session:
-        flash('You Need To Login First!')
-        return redirect(url_for('login'))
-    else:
-        style = mongo.db.user_settings.find_one(
-            {'username': session['user']})['dark_theme']
-        if style == 'on':
-            search = 'search.html'
-        else:
-            search = 'light_search.html'
-        return render_template(search)
-
-
 @app.route('/messages')
 def messages():
     if 'user' not in session:
@@ -283,28 +263,14 @@ def notifications():
         return render_template(notifications)
 
 
-@app.route('/friends')
-def friends():
-    if 'user' not in session:
-        flash('You Need To Login First!')
-        return redirect(url_for('login'))
-    else:
-        style = mongo.db.user_settings.find_one(
-            {'username': session['user']})['dark_theme']
-        if style == 'on':
-            friends = 'friends.html'
-        else:
-            friends = 'light_friends.html'
-        return render_template(friends)
-
-
 @app.route('/settings', methods=['GET', 'POST'])
 def settings():
     if 'user' not in session:
         flash('You Need To Login First!')
         return redirect(url_for('login'))
     else:
-    # for the themes add if statements in the base url to check the user settings and display specific css
+        # for the themes add if statements in the base
+        # url to check the user settings and display specific css
         style = mongo.db.user_settings.find_one(
             {'username': session['user']})['dark_theme']
         if style == 'on':
@@ -331,4 +297,3 @@ if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
             debug=True)
-
