@@ -50,6 +50,7 @@ timeDateUpload = "/" + dateUpload + timeUpload
 def get_random_string(length):
     letters = string.ascii_lowercase
     result_str = ''.join(random.choice(letters) for i in range(length))
+    return result_str
 
 
 #https://res.cloudinary.com/df-6999/image/upload/v1602729287/r00tacc0unt123/20203326023326.jpg
@@ -174,7 +175,7 @@ def home():
                 username = mongo.db.users.find_one(
                         {'username': session['user']})['username']
 
-                uniqueId = get_random_string(248)
+                uniqueId = username + timeDateUpload + get_random_string(15)
 
                 print(request.files)
                 print(uniqueId)
