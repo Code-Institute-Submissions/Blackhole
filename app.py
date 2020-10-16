@@ -153,25 +153,10 @@ def home():
         posts = list(mongo.db.posts.find().sort([('_id', -1)]))
 
         # post_id = mongo.db.post.find({'_id': ObjectId()})
+        print(request.files)
         if request.method == 'POST':
-            if request.files.get('image-post') == '':
-                if request.form.get('activity-post') == '':
-                    flash('You Need To Write Something To Post!')
-                else:
-                    username = mongo.db.users.find_one(
-                        {'username': session['user']})['username']
-                    new_post = {
-                        'description': request.form.get('activity-post'),
-                        'date_posted': current_date,
-                        'time_posted': current_time,
-                        'likes': 0,
-                        'created_by': username
-                    }
-
-                    mongo.db.posts.insert_one(new_post)
-                    flash('Posted Successfully!')
-                    return redirect(url_for('home'))
-            else:
+            if 'image-post' in request.files:
+                print(request.files)
                 username = mongo.db.users.find_one(
                         {'username': session['user']})['username']
 
@@ -195,6 +180,25 @@ def home():
                 mongo.db.posts.insert_one(new_post)
                 flash('Posted Successfully!')
                 return redirect(url_for('home'))
+            else:
+                if request.form.get('activity-post') == '':
+                    flash('You Need To Add Something To Post!')
+                else:
+                    username = mongo.db.users.find_one(
+                        {'username': session['user']})['username']
+                    new_post = {
+                        'description': request.form.get('activity-post'),
+                        'date_posted': current_date,
+                        'time_posted': current_time,
+                        'likes': 0,
+                        'photo_id': False,
+                        'created_by': username
+                    }
+
+                    mongo.db.posts.insert_one(new_post)
+                    flash('Posted Successfully!')
+                    return redirect(url_for('home'))
+                
         return render_template(home, posts=posts)
 
 
