@@ -12,7 +12,20 @@ $(document).ready(function(){
 });
 
 // IMAGE PREVIEW UPON UPLOAD
+// IMAGE CODE TAKEN FROM 
 
+function preview_image(event) 
+{
+ var reader = new FileReader();
+ reader.onload = function()
+ {
+  var output = document.getElementById('output');
+  output.src = reader.result;
+ }
+ reader.readAsDataURL(event.target.files[0]);
+
+ $('#preview-image').css('display','block');
+}
 
 // POP OUT MENUS AND ACTIVATION
 

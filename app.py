@@ -17,6 +17,10 @@ from cloudinary.api import delete_resources_by_tag, resources_by_tag, cloudinary
 from cloudinary.uploader import upload
 from cloudinary.utils import cloudinary_url
 
+import random
+import string
+
+
 if os.path.exists('env.py'):
     import env
 
@@ -42,6 +46,11 @@ current_date = now.strftime("%d/%m/%Y")
 timeUpload = now.strftime("%H%M%S")
 dateUpload = now.strftime('%Y%M%S')
 timeDateUpload = "/" + dateUpload + timeUpload
+
+def get_random_string(length):
+    letters = string.ascii_lowercase
+    result_str = ''.join(random.choice(letters) for i in range(length))
+
 
 #https://res.cloudinary.com/df-6999/image/upload/v1602729287/r00tacc0unt123/20203326023326.jpg
 
@@ -164,13 +173,15 @@ def home():
             else:
                 username = mongo.db.users.find_one(
                         {'username': session['user']})['username']
-                photo_id = username + timeDateUpload
-                print(photo_id)
+
+                uniqueId = get_random_string(248)
+
                 print(request.files)
+                print(uniqueId)
 
                 cloudinary.uploader.upload(
                     file=request.files.get('image-post'),
-                    public_id=photo_id,
+                    public_id=uniqueId,
                 )
                 new_post = {
                     'description': request.form.get('activity-post'),
@@ -178,7 +189,7 @@ def home():
                     'time_posted': current_time,
                     'likes': 0,
                     'created_by': username,
-                    'photo_id': photo_id
+                    'photo_id': uniqueId
                 }
                 mongo.db.posts.insert_one(new_post)
                 flash('Posted Successfully!')
@@ -315,3 +326,4 @@ if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
             debug=True)
+

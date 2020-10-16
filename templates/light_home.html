@@ -20,16 +20,17 @@
     <div id="activity" class="col s10 m8 l6">
         <div class="contain">
             <form id="new-post" method="POST" action="{{ url_for('home') }}" enctype="multipart/form-data">
+                <!-- IMAGE PREVIEW ON UPLOAD -->
+                <div id="image_preview">
+                    <img id="output" class="col s12"/>
+                </div>
+                <!-- POST INPUT FIELDS -->
                 <div class="input-field post col s12">
-                    <!-- IMAGE PREVIEW ON UPLOAD -->
-                    <div id="image_preview">
-                        <img id="output"/>
-                    </div>
                     <!-- Text descripton for the post-->
                     <textarea id="activity-post" name="activity-post" class="materialize-textarea"></textarea>
                     <label id="label-post" for="activity-post">Type your new post here:</label>
                     <!-- image upload ( need to add image preview still ) -->
-                    <input type="file" name="image-post" id="image-post" onchange="loadFile(event)" hidden="hidden">
+                    <input type="file" name="image-post" id="image-post" accept="image/*,video/*" onchange="preview_image(event)" hidden="hidden">
                     <i id="image-post-icon" class="btn fas fa-camera"></i>
                     <!-- mentioning friends on the post which also notifies the friend ( still need to figure out how to do it )-->
                     <input type="checkbox" name="post-mentions" id="post-mentions" hidden>
@@ -52,6 +53,7 @@
                 <hr>
                 <!-- SHOWS THE POST CONTENT -->
                 <div class="post-content">
+                    <img class="post-image" src="https://res.cloudinary.com/df-6999/image/upload/v1602729287/{{post.photo_id}}"/>
                     {{ post.description }}
                 </div>
                 <hr>
