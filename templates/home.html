@@ -10,8 +10,8 @@
         <div class="contain">
             <div id="home-mobile-side-nav">
                 <div id="profile-pop-out">
-                    <i class="profile-pop-out-icon fas fa-user-circle"></i>
-                    <i class="profile-pop-out-icon fas fa-envelope"></i>
+                    <i class="profile-pop-out-icon fas fa-user-circle tooltipped" data-position="bottom" data-tooltip="Profile"></i>
+                    <i class="profile-pop-out-icon fas fa-envelope tooltipped" data-position="bottom" data-tooltip="Messages"></i>
                 </div>
             </div>
         </div>
@@ -32,9 +32,6 @@
                     <!-- image upload ( need to add image preview still ) -->
                     <input type="file" name="image-post" id="image-post" accept="image/*,video/*" onchange="preview_image(event)" hidden="hidden">
                     <i id="image-post-icon" class="btn fas fa-camera"></i>
-                    <!-- mentioning friends on the post which also notifies the friend ( still need to figure out how to do it )-->
-                    <input type="checkbox" name="post-mentions" id="post-mentions" hidden>
-                    <i id="post-mentions-icon" class="btn fas fa-users"></i>
                     <!-- post submit button -->
                     <button name="post-submit" type="submit" class="btn" style="float:right;"><i class="fas fa-location-arrow"></i></button>
                 </div>
