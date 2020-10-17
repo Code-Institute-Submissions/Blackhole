@@ -25,7 +25,10 @@ body {
 .side-view {
     background-color: #212121;
     border-top: solid 2px #01579b;
-    height: 100px;
+}
+
+nav {
+    position: fixed;
 }
 
 /* POSTING AND POSTED */

@@ -33,6 +33,13 @@ nav .brand-logo {
     font-size: 1em;
 }
 
+/* SIDE VIEW */
+
+.side-view {
+    height: 600px;
+    position: fixed;
+}
+
 /* FLASHES */
 
 .flashes > h3 {
@@ -180,10 +187,77 @@ nav .brand-logo {
 
 /* SMALL MOBILE DEVICES AND UP*/
 
+@media only screen and (min-width: 319px) {
+
+    .side-view {
+    margin-top: 56px;
+    }
+
+    body nav {
+        position: fixed;
+    }
+
+    body nav .nav-wrapper {
+        position: fixed;
+        height: 57px;
+        width: 100%;
+    }
+
+    body #activity {
+        margin-top: 56px;
+        margin-left: 55.33px;
+        border-right: none;
+    }
+
+}
+
 @media only screen and (min-width: 350px) {
     /* NAV BAR */
     .nav-wrapper i {
         font-size: 1.55em;
+    }
+
+    /* SIDE BAR */
+
+    .side-view {
+        margin-top: 56px;
+    }
+
+    /* ACTIVITY */
+    body #activity {
+        margin-left: 63.5px;
+    }
+}
+
+@media only screen and (min-width: 425px) {
+    
+    body #activity {
+        margin-left: 71.828px;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    
+    body nav .nav-wrapper {
+        height: 66px;
+    }
+
+    body #activity {
+        margin-left: 258.328px;
+        margin-top: 64px;
+        border-right: solid 2px #0277bd;
+    }
+        /* SIDE BAR */
+
+    .side-view {
+        margin-top: 64px;
+    }
+
+@media only screen and (min-width: 1440px) {
+    
+    body #activity {
+        margin-left: 362px;
+        margin-top: 64px;
     }
 }
 
@@ -193,7 +267,9 @@ nav .brand-logo {
     font-size: 34px;
     margin-top: 10px;
     display: block;
+    text-align: center;
     }
+
     #friends-list {
         display: none;
     }
