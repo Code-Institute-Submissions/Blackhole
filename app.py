@@ -218,19 +218,23 @@ def delete_post(post_id):
 
 @app.route('/edit_post/<post_id>', methods=['GET', 'POST'])
 def edit_post(post_id):
-    if 'user' not in session:
-        flash('You Need To Login First!')
-        return redirect(url_for('login'))
-    else:
-        editted_post = {
-            'description': request.form.get('edit-post'),
-        }
 
-        mongo.db.posts.description.update(
-            {'_id': ObjectId(post_id)}, editted_post)
+    editted_post = {
+        'description': request.form.get('edit-description'),
+        'date_posted': request.form.get('edit-date_posted'),
+        'time_posted': request.form.get('edit-time_posted'),
+        'likes': request.form.get('edit-likes'),
+        'created_by': request.form.get('edit-created_by'),
+        'photo_id': request.form.get('edit-photo'),
+    }
 
-        flash('Post Updated!')
-        return redirect(url_for('home'))
+    print(editted_post)
+
+    mongo.db.posts.update(
+        {'_id': ObjectId(post_id)}, editted_post)
+
+    flash('Post Updated!')
+    return redirect(url_for('home'))
 
 
 @app.route('/messages')

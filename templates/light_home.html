@@ -1,11 +1,8 @@
-{% extends 'base.html' %}
-{% block styles %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/light_theme.css') }}">
-{% endblock %}
-{% block content %}
+{% extends 'base.html' %} {% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/light_theme.css') }}"> {% endblock %} {% block content %}
 <section class="row">
     <!-- PROFILE SECTION -->
-    <div id="profile-home" class="col s2 m4 l3 side-view">
+    <div id="profile-home" class="side-view">
         <div class="contain">
             <div id="home-mobile-side-nav">
                 <div id="profile-pop-out">
@@ -21,7 +18,7 @@
             <form id="new-post" method="POST" action="{{ url_for('home') }}" enctype="multipart/form-data">
                 <!-- IMAGE PREVIEW ON UPLOAD -->
                 <div id="image_preview">
-                    <img id="output" class="col s12"/>
+                    <img id="output" class="col s12" />
                 </div>
                 <!-- POST INPUT FIELDS -->
                 <div class="input-field post col s12">
@@ -52,47 +49,58 @@
                 <hr>
                 <!-- SHOWS THE POST CONTENT -->
                 <div class="post-content">
-                {% if post.photo_id == False %}
+                    {% if post.photo_id == False %}
                     <test></test>
-                {% else %}
-                    <img class="post-image col s12" src="https://res.cloudinary.com/df-6999/image/upload/v1602729287/{{post.photo_id}}"/>
-                {% endif %}
-                    {{ post.description }}
+                    {% else %}
+                    <img class="post-image col s12" src="https://res.cloudinary.com/df-6999/image/upload/v1602729287/{{post.photo_id}}" /> {% endif %} {{ post.description }}
                 </div>
                 <hr>
                 <!-- ALLOWS THE USER TO DELETE, EDIT AND LIKE THE POST -->
                 <div class="post-interactivity">
                     <!-- DISPLAYS THE LIKE BUTTON FOR ALL USERS -->
-                    <a href="{{ url_for('like_post', post_id=post._id) }}" class="likeButton tooltipped" data-position="bottom" data-tooltip="Like" name="like"><i class="fas fa-heart"></i></a> - {{ post.likes }}
-                    {% if post.created_by == session.user %}
-                        <!-- DISPLAYS THE EDIT POST AND DELETE POST JUST FOR THE USERS WHO MADE THE POST -->
-                        <a class="modal-trigger tooltipped" href="#edit{{post._id}}" data-position="bottom" data-tooltip="Edit" name="edit"><i class="fas fa-pencil-alt right"></i></a>
-                        <a class="modal-trigger tooltipped" href="#delete{{post._id}}" data-position="bottom" data-tooltip="Delete"><i class="fas fa-trash-alt right"></i></a>
-                    {% endif %}
+                    <a href="{{ url_for('like_post', post_id=post._id) }}" class="likeButton tooltipped" data-position="bottom" data-tooltip="Like" name="like"><i class="fas fa-heart"></i></a> - {{ post.likes }} {% if post.created_by == session.user %}
+                    <!-- DISPLAYS THE EDIT POST AND DELETE POST JUST FOR THE USERS WHO MADE THE POST -->
+                    <a class="modal-trigger tooltipped" href="#edit{{post._id}}" data-position="bottom" data-tooltip="Edit" name="edit"><i class="fas fa-pencil-alt right"></i></a>
+                    <a class="modal-trigger tooltipped" href="#delete{{post._id}}" data-position="bottom" data-tooltip="Delete"><i class="fas fa-trash-alt right"></i></a> {% endif %}
                 </div>
             </div>
             <!-- EDIT MODAL POP UP -->
             <div id="edit{{post._id}}" class="modal">
                 <form method="POST" action="{{ url_for('edit_post', post_id=post._id) }}">
-                <div class="modal-content">
-                    <!-- MODAL POP UP CONTENT -->
-                    <h5>Editting A Post</h5>
-                    <div class="row">
-                        <div class="col s12">
-                            <h5>{{ post.created_by }}
-                                <span>
-                                    {{ post.time_posted }} - {{ post.date_posted }}
-                                </span>
-                            </h5>
-                            <textarea id="edit-post" name="edit-post" class="materialize-textarea">{{post.description}}</textarea>
+                    <div class="modal-content">
+                        <!-- MODAL POP UP CONTENT -->
+                        <h5>Editting A Post</h5>
+                        <div class="row">
+                            <div class="input-field col s12 edit-hidden">
+                                <input id="edit-likes" type="text" name="edit-likes" value="{{ post.likes }}">
+                            </div>
+                        </div>
+                        {% if post.photo_id == False %}
+                        <test></test>
+                        {% else %}
+                        <div class="row">
+                            <div class="input-field col s12 edit-hidden">
+                                <input id="edit-photo" type="text" name="edit-photo" value="{{ post.photo_id }}">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <img class="edit-post-image" src="https://res.cloudinary.com/df-6999/image/upload/v1602729287/{{post.photo_id}}" alt="Uploaded Photo">
+                            </div>
+                        </div>
+                        {% endif %}
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input id="edit-description" type="text" name="edit-description" value="{{ post.description }}" class="validate">
+                                <label for="edit-description">Description</label>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <!-- MODAL BUTTONS TO CONFIRM THE EDIT OR CANCEL -->
-                    <a href="#" name="cancel" class="modal-close btn left cancel">Cancel</a>
-                    <button type="submit" name="edit" class="modal-close btn right edit">Save</button>
-                </div>
+                    <div class="modal-footer">
+                        <!-- MODAL BUTTONS TO CONFIRM THE EDIT OR CANCEL -->
+                        <a href="#" name="cancel" class="modal-close btn left cancel">Cancel</a>
+                        <button type="submit" name="edit" class="modal-close btn right edit">Save</button>
+                    </div>
                 </form>
             </div>
             <!-- DELETE MODAL POP UP -->
@@ -107,7 +115,6 @@
                     <a href="{{ url_for('delete_post', post_id=post._id) }}" name="delete" class="modal-close btn right delete red accent-4">Delete</a>
                 </div>
             </div>
-
             {% endfor %}
         </div>
     </div>

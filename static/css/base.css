@@ -166,6 +166,16 @@ nav .brand-logo {
     display: none;
 }
 
+/* EDITTING POSTS */
+
+.edit-post-image {
+    height: 130px;
+}
+
+.modal-content .edit-hidden {
+    display: none;
+}
+
 /* VERY SMALL MOBILE DEVICES */
 
 @media only screen and (max-width: 350px) {
@@ -191,6 +201,7 @@ nav .brand-logo {
 
     .side-view {
     margin-top: 56px;
+    width: 55.33px;
     }
 
     body nav {
@@ -221,6 +232,7 @@ nav .brand-logo {
 
     .side-view {
         margin-top: 56px;
+        width: 63.5px;
     }
 
     /* ACTIVITY */
@@ -230,17 +242,22 @@ nav .brand-logo {
 }
 
 @media only screen and (min-width: 425px) {
-    
+        
+    body nav .nav-wrapper {
+        height: 66px;
+    }
+
     body #activity {
         margin-left: 71.828px;
+    }
+    .side-view{
+        width: 71.828px;
+        margin-top: 66px;
     }
 }
 
 @media only screen and (min-width: 768px) {
-    
-    body nav .nav-wrapper {
-        height: 66px;
-    }
+
 
     body #activity {
         margin-left: 258.328px;
@@ -251,13 +268,19 @@ nav .brand-logo {
 
     .side-view {
         margin-top: 64px;
+        width: 258.328px;
     }
+
+}
 
 @media only screen and (min-width: 1440px) {
     
     body #activity {
         margin-left: 362px;
         margin-top: 64px;
+    }
+    .side-view {
+        width: 362px;
     }
 }
 
