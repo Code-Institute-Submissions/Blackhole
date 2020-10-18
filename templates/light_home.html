@@ -14,6 +14,18 @@
     </div>
     <!-- ACTIVITY / NEWS FEED -->
     <div id="activity" class="col s10 m8 l6">
+    <section>
+        <!-- flash messages -->
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="row flashes">
+                        <h3 class="center-align">{{ message }}</h3>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </section>
         <div class="contain">
             <form id="new-post" method="POST" action="{{ url_for('home') }}" enctype="multipart/form-data">
                 <!-- IMAGE PREVIEW ON UPLOAD -->
@@ -47,6 +59,7 @@
                     </h5>
                 </div>
                 <hr>
+                {{ post.photo_id }}
                 <!-- SHOWS THE POST CONTENT -->
                 <div class="post-content">
                     {% if post.photo_id == False %}
@@ -72,15 +85,34 @@
                         <h5>Editting A Post</h5>
                         <div class="row">
                             <div class="input-field col s12 edit-hidden">
+                                <input id="edit-username" type="text" name="edit-username" value="{{ post.created_by }}">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12 edit-hidden">
+                                <input id="edit-time" type="text" name="edit-time" value="{{ post.time_posted }}">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12 edit-hidden">
+                                <input id="edit-date" type="text" name="edit-date" value="{{ post.date_posted }}">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12 edit-hidden">
                                 <input id="edit-likes" type="text" name="edit-likes" value="{{ post.likes }}">
                             </div>
                         </div>
                         {% if post.photo_id == False %}
-                        <test></test>
+                        <div class="row">
+                            <div class="input-field col s12 edit-hidden">
+                                <input id="edit-photo" type="text" name="edit-photo-false" value="False">
+                            </div>
+                        </div>
                         {% else %}
                         <div class="row">
                             <div class="input-field col s12 edit-hidden">
-                                <input id="edit-photo" type="text" name="edit-photo" value="{{ post.photo_id }}">
+                                <input id="edit-photo" type="text" name="edit-photo-true" value="{{ post.photo_id }}">
                             </div>
                         </div>
                         <div class="row">
@@ -116,12 +148,6 @@
                 </div>
             </div>
             {% endfor %}
-        </div>
-    </div>
-    <!-- FRIENDS -->
-    <div id="friends-list" class="col s0 m0 l3 side-view">
-        <div class=" contain">
-            TEST
         </div>
     </div>
 </section>

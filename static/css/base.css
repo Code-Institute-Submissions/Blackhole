@@ -204,14 +204,20 @@ nav .brand-logo {
     width: 55.33px;
     }
 
+    .flashes {
+        margin-top: 56px;
+    }
+
     body nav {
         position: fixed;
+        top: 0;
     }
 
     body nav .nav-wrapper {
         position: fixed;
         height: 57px;
         width: 100%;
+        top: 0;
     }
 
     body #activity {
@@ -252,6 +258,10 @@ nav .brand-logo {
     }
     .side-view{
         width: 71.828px;
+        margin-top: 66px;
+    }
+
+    .flashes {
         margin-top: 66px;
     }
 }

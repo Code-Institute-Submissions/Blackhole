@@ -18,6 +18,18 @@
     </div>
     <!-- ACTIVITY / NEWS FEED -->
     <div id="activity" class="col s10 m8 l6">
+    <section>
+        <!-- flash messages -->
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="row flashes">
+                        <h3 class="center-align">{{ message }}</h3>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </section>
         <div class="contain">
             <form id="new-post" method="POST" action="{{ url_for('home') }}" enctype="multipart/form-data">
                 <!-- IMAGE PREVIEW ON UPLOAD -->

@@ -219,13 +219,18 @@ def delete_post(post_id):
 @app.route('/edit_post/<post_id>', methods=['GET', 'POST'])
 def edit_post(post_id):
 
+    if request.form.get('edit-photo') is False:
+        editPhoto = 'edit-photo-false'
+    else:
+        editPhoto = 'edit-photo-true'
+
     editted_post = {
         'description': request.form.get('edit-description'),
-        'date_posted': request.form.get('edit-date_posted'),
-        'time_posted': request.form.get('edit-time_posted'),
+        'date_posted': request.form.get('edit-date'),
+        'time_posted': request.form.get('edit-time'),
         'likes': request.form.get('edit-likes'),
-        'created_by': request.form.get('edit-created_by'),
-        'photo_id': request.form.get('edit-photo'),
+        'created_by': request.form.get('edit-username'),
+        'photo_id': request.form.get(editPhoto),
     }
 
     print(editted_post)
