@@ -1,3 +1,35 @@
+// SIGN UP FORM
+
+function isNumeric(value) {
+    return /^-?\d+$/.test(value);
+}
+
+    // FIRST NAME VALIDATION
+
+function firstNameCheck() {
+    
+    var fN = document.forms['signUpForm']['first_name'].value;
+    var fNE = document.getElementById('first-name-error');
+
+     console.log(isNumeric(fN));
+
+    if (fN.length < 3) {
+        fNE.innerHTML = 'You Need To Enter More Than 3 Letters!';
+        console.log(fNE);
+    } else {
+        fNE.innerHTML = ''
+    }
+    console.log(fN);
+
+    fN.addEventListener('keydown', function(e) {
+  if (!e.repeat)
+    logMessage(`Key "${e.key}" pressed  [event: keydown]`);
+  else
+    logMessage(`Key "${e.key}" repeating  [event: keydown]`);
+});
+};
+
+
 // CALENDAR FOR DOB ON SIGN UP
 
 $(document).ready(function(){
@@ -31,6 +63,10 @@ function preview_image(event)
 
 $(document).on('click', '#profile-icon', function() {
     $('#profile-pop-out-section').toggle();
+})
+
+$(document).on('click', '#image-post-icon', function() {
+    $('#image-post').click();
 })
 
 $(document).on('click', '#messages-icon', function() {

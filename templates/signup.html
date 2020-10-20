@@ -11,13 +11,14 @@
         <div class="card-content blue-text darken-1">
             <span class="card-title">Sign Up</span>
             <div class="row">
-                <form class="col s12" method="POST" action="{{ url_for ('signup') }}">
+                <form class="col s12" method="POST" name="signUpForm" action="{{ url_for ('signup') }}">
                     <div class="row">
                         <!-- FIRST NAME INPUT -->
                         <div class="input-field col s12">
                             <input id="first_name" name="first_name" type="text" class="validate"
-                             minlength="3" maxlength="20" pattern="^[a-zA-Z]{3,20}$" required>
+                             minlength="3" maxlength="20" pattern="^[a-zA-Z]{3,20}$" onfocusout="firstNameCheck()" required>
                             <label for="first_name">First Name</label>
+                            <span id="first-name-error" class="error-message"></span>
                         </div>
                         <!-- LAST NAME INPUT -->
                         <div class="input-field col s12">
