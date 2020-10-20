@@ -29,16 +29,12 @@ function preview_image(event)
 
 // POP OUT MENUS AND ACTIVATION
 
-$(document).on('click', '#profile-pop-out-icon', function() {
+$(document).on('click', '#profile-icon', function() {
     $('#profile-pop-out-section').toggle();
 })
 
-$(document).on('click', '#image-post-icon', function() {
-    $('#image-post').click();
-})
-
-$(document).on('click', '#mentions-post-icon', function() {
-    $('#mentions-post').click();
+$(document).on('click', '#messages-icon', function() {
+    $('#messages-pop-out-section').click();
 })
 
 // SETTINGS THEMES SWITCHES

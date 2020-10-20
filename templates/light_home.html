@@ -6,14 +6,14 @@
         <div class="contain">
             <div id="home-mobile-side-nav">
                 <div id="profile-pop-out">
-                    <i class="profile-pop-out-icon fas fa-user-circle tooltipped" data-position="bottom" data-tooltip="Profile"></i>
-                    <i class="profile-pop-out-icon fas fa-envelope tooltipped" data-position="bottom" data-tooltip="Messages"></i>
+                    <i id="profile-icon" class="profile-pop-out-icon fas fa-user-circle tooltipped" data-position="bottom" data-tooltip="Profile"></i>
+                    <i id="messages-icon" class="profile-pop-out-icon fas fa-envelope tooltipped" data-position="bottom" data-tooltip="Messages"></i>
                 </div>
             </div>
         </div>
     </div>
     <!-- ACTIVITY / NEWS FEED -->
-    <div id="activity" class="col s10 m8 l6">
+    <div id="activity" class="col s10">
     <section>
         <!-- flash messages -->
         {% with messages = get_flashed_messages() %}
@@ -158,7 +158,7 @@
         Test
     </div>
     <!-- POP OUT FOR THE FRIENDS SECTION -->
-    <div id="friends-pop-out-section" class="col s10">
+    <div id="messages-pop-out-section" class="col s10">
         Test
     </div>
 </section>
