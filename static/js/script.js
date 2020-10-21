@@ -2,36 +2,62 @@
 
     // FORM VALIDATION
 
-function formCheck(formTag, popUpTag, pattern, minLimit) {
+function formCheck(formTag, popUpTag, pattern, minLimit, returnSpecific) {
     
     var userInput = document.forms['signUpForm'][formTag].value;
     var popUp = document.getElementById(popUpTag);
 
     if (userInput == '') {
-        popUp.innerHTML = 'You Need To Complete This Form!'
+        popUp.innerHTML = 'You Need To Complete This Form!';
     } else if (userInput.length < minLimit) {
-        popUp.innerHTML = `You Need To Enter More Than ${minLimit} Letters!`;
+        popUp.innerHTML = `You Need To Enter Atleast ${minLimit} ${returnSpecific}!`;
     } else if(userInput.match(pattern)) {
         popUp.innerHTML = '';
     } else {
-        popUp.innerHTML = 'You Can Only Enter Letters!'
-    }
+        popUp.innerHTML = `You Can Only Enter ${returnSpecific}!`;
+    };
 };
 
 
-    // USERNAME VALIDATION 
+    // DOB VALIDATION 
 
-function usernameCheck() {
-    var userInput = document.forms['signUpForm']['username'].value;
-    var popUp = document.getElementById('username-error')
-    var pattern = /^[A-Za-z0-9]+$/;
+function dobCheck() {
 
-    if (userInput.length < 5) {
-        popUp.innerHTML = 'You Need To Enter More Than 3 Characters!'
-    } else if ( userInput ){
+    var userInput = document.forms['signUpForm']['DOB'].value;
+    var popUp = document.getElementById('dob-error')
 
-    }
-}
+    if (userInput == '') {
+        popUp.innerHTML = 'You Need To Complete This Form!';
+    };
+};
+
+
+    // PASSWORD VALIDATION
+
+function passCheck(passTag, passTagTwo, popUpTag) {
+
+    var userInput = document.forms['signUpForm'][passTag].value;
+    var passConfirm = document.forms['signUpForm'][passTagTwo].value;
+    var popUp = document.getElementById(popUpTag);
+
+    console.log('Function Loaded')
+    console.log(userInput)
+
+    if (userInput == '') {
+        popUp.innerHTML = 'You Need To Complete This Form!';
+        console.log('1st if')
+    } else if ( userInput.length < 10) {
+        console.log('2nd if')
+        popUp.innerHTML = 'Your Password Is Too Small!';
+    } else if ( userInput = passConfirm ) {
+        console.log('3rd if')
+        popUp.innerHTML = 'Password Do Not Match!';
+    } else {
+        console.log('else')
+        popUp.innerHTML = '';
+    };
+};
+
 
 // CALENDAR FOR DOB ON SIGN UP
 

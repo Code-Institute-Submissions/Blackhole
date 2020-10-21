@@ -16,21 +16,24 @@
                         <!-- FIRST NAME INPUT -->
                         <div class="input-field col s12">
                             <input id="first_name" name="first_name" type="text" class="validate"
-                             minlength="3" maxlength="20" pattern="^[a-zA-Z]{3,20}$" onfocusout="formCheck('first_name', 'first-name-error', /^[A-Za-z]+$/, 3)" required>
+                             minlength="3" maxlength="20" pattern="^[a-zA-Z]{3,20}$" 
+                             onfocusout="formCheck('first_name', 'first-name-error', /^[A-Za-z]+$/, 3, 'Letters')" required>
                             <label for="first_name">First Name</label>
                             <span id="first-name-error" class="error-message"></span>
                         </div>
                         <!-- LAST NAME INPUT -->
                         <div class="input-field col s12">
                             <input id="last_name" name="last_name" type="text" class="validate"
-                             minlength="3" maxlength="20" pattern="^[a-zA-Z]{3,20}$" onfocusout="formCheck('last_name', 'last-name-error', /^[A-Za-z]+$/, 3)" required>
+                             minlength="3" maxlength="20" pattern="^[a-zA-Z]{3,20}$" 
+                             onfocusout="formCheck('last_name', 'last-name-error', /^[A-Za-z]+$/, 3, 'Letters')" required>
                             <label for="last_name">Last Name</label>
                             <span id="last-name-error" class="error-message"></span>
                         </div>
                         <!-- USERNAME INPUT -->
                         <div class="input-field col s12">
                             <input id="username" name="username" type="text" class="validate"
-                             minlength="5" maxlength="20" pattern="^[a-zA-Z0-9]{5,20}$" onfocusout="formCheck('username', 'username-error', /^[A-Za-z0-9]+$/, 5)" required>
+                             minlength="5" maxlength="20" pattern="^[a-zA-Z0-9]{5,20}$" 
+                             onfocusout="formCheck('username', 'username-error', /^[A-Za-z0-9]+$/, 5, 'Letters or Numbers')" required>
                             <label for="username">Username</label>
                             <span id="username-error" class="error-message"></span>
                         </div>
@@ -42,25 +45,33 @@
                         <!-- PHONE NUMBER INPUT -->
                         <div class="input-field col s12">
                             <input id="phone_number" name="phone_number" type="text" class="validate"
-                             minlength="10" maxlength="12" pattern="^[0-9]{10,12}$" required>
+                             minlength="10" maxlength="12" pattern="^[+0-9]{10,12}$" 
+                             onfocusout="formCheck('phone_number', 'phone-number-error', /[0-9]+$/, 10, 'Numbers')" required>
                             <label for="phone_number">Phone Number</label>
+                            <span id="phone-number-error" class="error-message"></span>
                         </div>
                         <!-- DATE OF BIRTH PICKER -->
                         <div class="input-field col s12">
-                            <input id="DOB" name="DOB" type="text" class="datepicker validate" required>
+                            <input id="DOB" name="DOB" type="text" class="datepicker validate"
+                            onfocusout='dobCheck()' required>
                             <label for="DOB">Date Of Birth</label>
+                            <span id="dob-error" class="error-message"></span>
                         </div>
                         <!-- PASSWORD INPUT -->
                         <div class="input-field col s12">
                             <input id="password" name="password" type="password" class="validate"
-                             minlength="10" maxlength="20" required>
+                             minlength="10" maxlength="30"
+                             onfocusout="passCheck('password', 'confirm-password', 'password-error')" required>
                             <label for="password">Password</label>
+                            <span id="password-error" class="error-message"></span>
                         </div>
                         <!-- PASSWORD CONFIRM INPUT -->
                         <div class="input-field col s12">
                             <input id="confirm-password" name="confirm-password" type="password" class="validate"
-                             minlength="10" maxlength="20" required>
+                             minlength="10" maxlength="30"
+                             onfocusout="passCheck('confirm-password', 'password', 'confirm-password-error')" required>
                             <label for="confirm-password">Confirm Password</label>
+                            <span id="confirm-password-error" class="error-message"></span>
                         </div>
                         <!-- SUBMIT BUTTON -->
                         <div class="input-field col s12">
