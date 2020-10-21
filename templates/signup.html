@@ -16,22 +16,23 @@
                         <!-- FIRST NAME INPUT -->
                         <div class="input-field col s12">
                             <input id="first_name" name="first_name" type="text" class="validate"
-                             minlength="3" maxlength="20" pattern="^[a-zA-Z]{3,20}$" onfocusout="nameCheck('first_name', 'first-name-error')" required>
+                             minlength="3" maxlength="20" pattern="^[a-zA-Z]{3,20}$" onfocusout="formCheck('first_name', 'first-name-error', /^[A-Za-z]+$/, 3)" required>
                             <label for="first_name">First Name</label>
                             <span id="first-name-error" class="error-message"></span>
                         </div>
                         <!-- LAST NAME INPUT -->
                         <div class="input-field col s12">
                             <input id="last_name" name="last_name" type="text" class="validate"
-                             minlength="3" maxlength="20" pattern="^[a-zA-Z]{3,20}$" onfocusout="nameCheck('last_name', 'last-name-error')" required>
+                             minlength="3" maxlength="20" pattern="^[a-zA-Z]{3,20}$" onfocusout="formCheck('last_name', 'last-name-error', /^[A-Za-z]+$/, 3)" required>
                             <label for="last_name">Last Name</label>
                             <span id="last-name-error" class="error-message"></span>
                         </div>
                         <!-- USERNAME INPUT -->
                         <div class="input-field col s12">
                             <input id="username" name="username" type="text" class="validate"
-                             minlength="5" maxlength="20" pattern="^[a-zA-Z0-9]{5,20}$" required>
+                             minlength="5" maxlength="20" pattern="^[a-zA-Z0-9]{5,20}$" onfocusout="formCheck('username', 'username-error', /^[A-Za-z0-9]+$/, 5)" required>
                             <label for="username">Username</label>
+                            <span id="username-error" class="error-message"></span>
                         </div>
                         <!-- EMAIL INPUT -->
                         <div class="input-field col s12">

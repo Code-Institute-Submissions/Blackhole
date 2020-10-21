@@ -1,22 +1,37 @@
 // SIGN UP FORM
 
-    // NAME VALIDATION
+    // FORM VALIDATION
 
-function nameCheck(nameTag, errorTag) {
+function formCheck(formTag, popUpTag, pattern, minLimit) {
     
-    var fN = document.forms['signUpForm'][nameTag].value;
-    var fNE = document.getElementById(errorTag);
-    var letters = /^[A-Za-z]+$/;
+    var userInput = document.forms['signUpForm'][formTag].value;
+    var popUp = document.getElementById(popUpTag);
 
-    if (fN.length < 3) {
-        fNE.innerHTML = 'You Need To Enter More Than 3 Letters!';
-    }
-    else if(fN.match(letters)) {
-        fNE.innerHTML = '';
+    if (userInput == '') {
+        popUp.innerHTML = 'You Need To Complete This Form!'
+    } else if (userInput.length < minLimit) {
+        popUp.innerHTML = `You Need To Enter More Than ${minLimit} Letters!`;
+    } else if(userInput.match(pattern)) {
+        popUp.innerHTML = '';
     } else {
-        fNE.innerHTML = 'You Can Only Enter Letters!'
+        popUp.innerHTML = 'You Can Only Enter Letters!'
     }
 };
+
+
+    // USERNAME VALIDATION 
+
+function usernameCheck() {
+    var userInput = document.forms['signUpForm']['username'].value;
+    var popUp = document.getElementById('username-error')
+    var pattern = /^[A-Za-z0-9]+$/;
+
+    if (userInput.length < 5) {
+        popUp.innerHTML = 'You Need To Enter More Than 3 Characters!'
+    } else if ( userInput ){
+
+    }
+}
 
 // CALENDAR FOR DOB ON SIGN UP
 
