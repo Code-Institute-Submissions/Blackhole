@@ -147,8 +147,6 @@ def home():
 
         posts = list(mongo.db.posts.find().sort([('_id', -1)]))
 
-        # post_id = mongo.db.post.find({'_id': ObjectId()})
-        print(request.files)
         if request.method == 'POST':
             if request.files['image-post'].filename == '':
                 if request.form.get('activity-post') == '':
@@ -169,14 +167,10 @@ def home():
                     flash('Posted Successfully!')
                     return redirect(url_for('home'))
             else:
-                print(request.files)
                 username = mongo.db.users.find_one(
                         {'username': session['user']})['username']
 
                 uniqueId = username + timeDateUpload + get_random_string(15)
-
-                print(request.files)
-                print(uniqueId)
 
                 cloudinary.uploader.upload(
                     file=request.files.get('image-post'),
@@ -223,8 +217,6 @@ def delete_post(post_id):
 
 @app.route('/edit_post/<post_id>', methods=['GET', 'POST'])
 def edit_post(post_id):
-    print('edit-post=true')
-    print(request.form.get('edit-photo-check'))
     editted_post = {
         'description': request.form.get('edit-description'),
         'date_posted': request.form.get('edit-date'),
@@ -233,8 +225,6 @@ def edit_post(post_id):
         'created_by': request.form.get('edit-username'),
         'photo_id': request.form.get('edit-photo-check'),
     }
-
-    print(editted_post)
 
     mongo.db.posts.update(
         {'_id': ObjectId(post_id)}, editted_post)

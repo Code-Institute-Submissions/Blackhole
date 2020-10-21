@@ -40,20 +40,13 @@ function passCheck(passTag, passTagTwo, popUpTag) {
     var passConfirm = document.forms['signUpForm'][passTagTwo].value;
     var popUp = document.getElementById(popUpTag);
 
-    console.log('Function Loaded')
-    console.log(userInput)
-
     if (userInput == '') {
         popUp.innerHTML = 'You Need To Complete This Form!';
-        console.log('1st if')
     } else if ( userInput.length < 10) {
-        console.log('2nd if')
         popUp.innerHTML = 'Your Password Is Too Small!';
     } else if ( userInput = passConfirm ) {
-        console.log('3rd if')
         popUp.innerHTML = 'Password Do Not Match!';
     } else {
-        console.log('else')
         popUp.innerHTML = '';
     };
 };
