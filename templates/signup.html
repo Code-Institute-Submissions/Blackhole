@@ -16,15 +16,16 @@
                         <!-- FIRST NAME INPUT -->
                         <div class="input-field col s12">
                             <input id="first_name" name="first_name" type="text" class="validate"
-                             minlength="3" maxlength="20" pattern="^[a-zA-Z]{3,20}$" onfocusout="firstNameCheck()" required>
+                             minlength="3" maxlength="20" pattern="^[a-zA-Z]{3,20}$" onfocusout="nameCheck('first_name', 'first-name-error')" required>
                             <label for="first_name">First Name</label>
                             <span id="first-name-error" class="error-message"></span>
                         </div>
                         <!-- LAST NAME INPUT -->
                         <div class="input-field col s12">
                             <input id="last_name" name="last_name" type="text" class="validate"
-                             minlength="3" maxlength="20" pattern="^[a-zA-Z]{3,20}$" required>
+                             minlength="3" maxlength="20" pattern="^[a-zA-Z]{3,20}$" onfocusout="nameCheck('last_name', 'last-name-error')" required>
                             <label for="last_name">Last Name</label>
+                            <span id="last-name-error" class="error-message"></span>
                         </div>
                         <!-- USERNAME INPUT -->
                         <div class="input-field col s12">
