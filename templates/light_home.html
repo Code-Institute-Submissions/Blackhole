@@ -62,10 +62,12 @@
                 {{ post.photo_id }}
                 <!-- SHOWS THE POST CONTENT -->
                 <div class="post-content">
-                    {% if post.photo_id == False %}
-                    <test></test>
-                    {% else %}
-                    <img class="post-image col s12" src="https://res.cloudinary.com/df-6999/image/upload/v1602729287/{{post.photo_id}}" /> {% endif %} {{ post.description }}
+                    {% if post.photo_id != 'False' %}
+                        {% if post.photo_id != False %}
+                            <img class="post-image col s12" src="https://res.cloudinary.com/df-6999/image/upload/v1602729287/{{post.photo_id}}" />
+                        {% endif %}
+                    {% endif %}
+                    {{ post.description }}
                 </div>
                 <hr>
                 <!-- ALLOWS THE USER TO DELETE, EDIT AND LIKE THE POST -->
@@ -103,10 +105,15 @@
                                 <input id="edit-likes" type="text" name="edit-likes" value="{{ post.likes }}">
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="input-field col s12 edit-hidden">
+                                <input id="edit-photo-check" type="text" name="edit-photo-check" value="{{ post.photo_id }}">
+                            </div>
+                        </div>
                         {% if post.photo_id == False %}
                         <div class="row">
                             <div class="input-field col s12 edit-hidden">
-                                <input id="edit-photo" type="text" name="edit-photo-false" value="False">
+                                <input id="edit-photo-false" type="text" name="edit-photo-false" value="False">
                             </div>
                         </div>
                         {% else %}

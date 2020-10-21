@@ -181,6 +181,11 @@ def home():
                 cloudinary.uploader.upload(
                     file=request.files.get('image-post'),
                     public_id=uniqueId,
+                    height=500,
+                    quality=100,
+                    width=500,
+                    crop="limit",
+                    transformation=["media_lib_thumb"]
                 )
                 new_post = {
                     'description': request.form.get('activity-post'),
@@ -218,19 +223,15 @@ def delete_post(post_id):
 
 @app.route('/edit_post/<post_id>', methods=['GET', 'POST'])
 def edit_post(post_id):
-
-    if request.form.get('edit-photo') is False:
-        editPhoto = 'edit-photo-false'
-    else:
-        editPhoto = 'edit-photo-true'
-
+    print('edit-post=true')
+    print(request.form.get('edit-photo-check'))
     editted_post = {
         'description': request.form.get('edit-description'),
         'date_posted': request.form.get('edit-date'),
         'time_posted': request.form.get('edit-time'),
         'likes': request.form.get('edit-likes'),
         'created_by': request.form.get('edit-username'),
-        'photo_id': request.form.get(editPhoto),
+        'photo_id': request.form.get('edit-photo-check'),
     }
 
     print(editted_post)
