@@ -49,6 +49,10 @@ nav .brand-logo {
 
 /* POSTS AND POSTING */
 
+body #activity {
+    height: 100%;
+}
+
 /* POSTING */
 
 
@@ -119,6 +123,9 @@ nav .brand-logo {
 
 #activity .post-image {
     padding-bottom: 1em;
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
 }
 
 /* POST INTERACTIVITY */
@@ -232,7 +239,8 @@ nav .brand-logo {
         margin-top: 56px;
         margin-left: 55.33px;
         border-right: none;
-        padding: 50px;
+        padding: 10px;
+        padding-left: 30px;
     }
 
 }
@@ -285,7 +293,7 @@ nav .brand-logo {
         padding: 50px;
     }
 
-    #activity .post-image {
+    #activity {
         height: 500px;
     }    
         /* SIDE BAR */
@@ -321,5 +329,3 @@ nav .brand-logo {
         display: none;
     }
 }
-
-/* extra bit of typing so it allows me to commit the changes via the github website */

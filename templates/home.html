@@ -17,7 +17,7 @@
         </div>
     </div>
     <!-- ACTIVITY / NEWS FEED -->
-    <div id="activity" class="col s10">
+    <div id="activity" class="col s9">
     <section>
         <!-- flash messages -->
         {% with messages = get_flashed_messages() %}
@@ -63,7 +63,6 @@
                     </h5>
                 </div>
                 <hr>
-                {{ post.photo_id }}
                 <!-- SHOWS THE POST CONTENT -->
                 <div class="post-content">
                     {% if post.photo_id != 'False' %}
@@ -72,15 +71,17 @@
                         {% endif %}
                     {% endif %}
                     {{ post.description }}
+                    <hr>
                 </div>
-                <hr>
                 <!-- ALLOWS THE USER TO DELETE, EDIT AND LIKE THE POST -->
                 <div class="post-interactivity">
                     <!-- DISPLAYS THE LIKE BUTTON FOR ALL USERS -->
-                    <a href="{{ url_for('like_post', post_id=post._id) }}" class="likeButton tooltipped" data-position="bottom" data-tooltip="Like" name="like"><i class="fas fa-heart"></i></a> - {{ post.likes }} {% if post.created_by == session.user %}
-                    <!-- DISPLAYS THE EDIT POST AND DELETE POST JUST FOR THE USERS WHO MADE THE POST -->
-                    <a class="modal-trigger tooltipped" href="#edit{{post._id}}" data-position="bottom" data-tooltip="Edit" name="edit"><i class="fas fa-pencil-alt right"></i></a>
-                    <a class="modal-trigger tooltipped" href="#delete{{post._id}}" data-position="bottom" data-tooltip="Delete"><i class="fas fa-trash-alt right"></i></a> {% endif %}
+                    <a href="{{ url_for('like_post', post_id=post._id) }}" class="likeButton tooltipped" data-position="bottom" data-tooltip="Like" name="like"><i class="fas fa-heart"></i></a> {{ post.likes }}
+                    {% if post.created_by == session.user %}
+                        <!-- DISPLAYS THE EDIT POST AND DELETE POST JUST FOR THE USERS WHO MADE THE POST -->
+                        <a class="modal-trigger tooltipped" href="#edit{{post._id}}" data-position="bottom" data-tooltip="Edit" name="edit"><i class="fas fa-pencil-alt right"></i></a>
+                        <a class="modal-trigger tooltipped" href="#delete{{post._id}}" data-position="bottom" data-tooltip="Delete"><i class="fas fa-trash-alt right"></i></a>
+                    {% endif %}
                 </div>
             </div>
             <!-- EDIT MODAL POP UP -->

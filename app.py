@@ -175,11 +175,8 @@ def home():
                 cloudinary.uploader.upload(
                     file=request.files.get('image-post'),
                     public_id=uniqueId,
-                    height=500,
                     quality=100,
-                    width=500,
-                    crop="limit",
-                    transformation=["media_lib_thumb"]
+                    crop="fill"
                 )
                 new_post = {
                     'description': request.form.get('activity-post'),
