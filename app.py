@@ -176,7 +176,8 @@ def home():
                     file=request.files.get('image-post'),
                     public_id=uniqueId,
                     quality=100,
-                    crop="fill"
+                    crop="fill",
+                    format='WebP'
                 )
                 new_post = {
                     'description': request.form.get('activity-post'),

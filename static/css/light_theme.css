@@ -40,6 +40,7 @@ nav .nav-wrapper {
 #activity {
     border: solid 2px #0277bd;
     border-top: none;
+    border-right: none;
 }
 
 

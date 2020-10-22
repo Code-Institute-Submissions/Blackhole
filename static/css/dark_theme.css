@@ -38,6 +38,7 @@ nav {
 #activity {
     border: solid 2px #01579b;
     border-top: none;
+    border-right: none;
 }
 
 
