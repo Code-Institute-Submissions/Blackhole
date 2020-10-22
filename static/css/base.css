@@ -18,9 +18,10 @@ nav .brand-logo {
 }
 
 #nav-mobile {
-  display: flex;
-  justify-content: space-between;
-  height: 56px;
+    display: flex;
+    justify-content: space-between;
+    height: 56px;
+    margin-right: 15px;
 }
 
 @media screen and (min-width: 600px) {
@@ -110,6 +111,13 @@ nav .brand-logo {
 
 #activity .post-content {
     padding-top: 1em;
+}
+
+#activity .post-content hr {
+    overflow: auto;
+}
+
+#activity .post-image {
     padding-bottom: 1em;
 }
 
@@ -224,6 +232,7 @@ nav .brand-logo {
         margin-top: 56px;
         margin-left: 55.33px;
         border-right: none;
+        padding: 50px;
     }
 
 }
@@ -273,7 +282,12 @@ nav .brand-logo {
         margin-left: 258.328px;
         margin-top: 64px;
         border-right: solid 2px #0277bd;
+        padding: 50px;
     }
+
+    #activity .post-image {
+        height: 500px;
+    }    
         /* SIDE BAR */
 
     .side-view {
