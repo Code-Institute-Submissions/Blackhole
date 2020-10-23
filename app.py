@@ -235,8 +235,13 @@ def comment(post_id):
                 }
             }
 
-            mongo.db.posts.findAndModify(
-                {'_id': ObjectId(post_id)}, new_comment)
+            mongo.db.posts.find_one_and_update(
+                {'_id': ObjectId(post_id)}, {"$set": {'comments': {uniqueId: {
+                    'comment': request.form.get('comment-post'),
+                    'date_posted': current_date,
+                    'time_posted': current_time,
+                    'created_by': username
+                }}}})
 
         return render_template(comments, post=post)
 

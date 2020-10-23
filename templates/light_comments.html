@@ -28,6 +28,7 @@
 </section>
 <hr class="comment-hr">
 <section id="post-comment">
+<form id="new-comment" method="POST" action="{{ url_for('comment', post_id=post._id) }}" enctype="multipart/form-data">
     <!-- COMMENT INPUT FIELDS -->
     <div class="input-field post col s12">
         <!-- Text descripton for the post-->
@@ -36,6 +37,7 @@
         <!-- post submit button -->
         <button id="comment-btn" name="comment-submit" type="submit" class="btn"><i class="fas fa-location-arrow"></i></button>
     </div>
+</form>
 </section>
 <hr class="comment-hr">
 <section id="comments">
