@@ -28,7 +28,7 @@
 </section>
 <hr class="comment-hr">
 <section id="post-comment">
-<form id="new-comment" method="POST" action="{{ url_for('comment', post_id=post._id) }}" enctype="multipart/form-data">
+<form id="new-comment" method="POST" action="{{ url_for('all_comments', post_id=post._id) }}" enctype="multipart/form-data">
     <!-- COMMENT INPUT FIELDS -->
     <div class="input-field post col s12">
         <!-- Text descripton for the post-->
@@ -45,9 +45,9 @@
         <div class="comment-info">
             <h5 class="post-title">
             <!-- DISPLAYS WHO THE POST WAS POSTED BY -->
-                {{ comment.created_by }} <br>
+                {{ comments.created_by }} <br>
             <!-- DISPLAYS THE TIME AND DATE THE POST WAS MADE-->
-            <span class="post-info"> {{ comment.time_commented }} - {{ post.date_commented }} </span>
+            <span class="post-info"> {{ comments.time_commented }} - {{ comments.date_commented }} </span>
         </h5>
         </div>
     {% endfor %}

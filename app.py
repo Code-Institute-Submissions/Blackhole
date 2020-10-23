@@ -161,7 +161,6 @@ def home():
                         'likes': 0,
                         'photo_id': False,
                         'created_by': username,
-                        'comments': {}
                     }
 
                     mongo.db.posts.insert_one(new_post)
@@ -187,7 +186,6 @@ def home():
                     'likes': 0,
                     'created_by': username,
                     'photo_id': uniqueId,
-                    'comments': {}
                     }
 
                 mongo.db.posts.insert_one(new_post)
@@ -204,8 +202,8 @@ def like_post(post_id):
     return redirect(url_for('home'))
 
 
-@app.route('/comment/<post_id>', methods=['GET', 'POST'])
-def comment(post_id):
+@app.route('/all_comments/<post_id>', methods=['GET', 'POST'])
+def all_comments(post_id):
     if 'user' not in session:
         flash('You Need To Login First!')
         return redirect(url_for('login'))
@@ -213,11 +211,17 @@ def comment(post_id):
         style = mongo.db.user_settings.find_one(
             {'username': session['user']})['dark_theme']
         if style == 'on':
-            comments = 'comments.html'
+            all_comments = 'comments.html'
         else:
-            comments = 'light_comments.html'
+            all_comments = 'light_comments.html'
 
         post = mongo.db.posts.find_one({'_id': ObjectId(post_id)})
+
+        comments = list(mongo.db.comments.find({'comment_for':post_id}).sort([('_id', -1)]))
+
+        print(comments)
+
+        print(post_id)
 
         if request.method == 'POST':
 
@@ -226,24 +230,17 @@ def comment(post_id):
 
             uniqueId = username + timeDateUpload + get_random_string(15)
 
-            new_comment = {
-                uniqueId: {
-                    'comment': request.form.get('comment-post'),
-                    'date_posted': current_date,
-                    'time_posted': current_time,
-                    'created_by': username
-                }
-            }
+            new_comment = {uniqueId: {
+                'comment_for': post_id,
+                'comment': request.form.get('comment-post'),
+                'date_posted': current_date,
+                'time_posted': current_time,
+                'created_by': username
+            }}
 
-            mongo.db.posts.find_one_and_update(
-                {'_id': ObjectId(post_id)}, {"$set": {'comments': {uniqueId: {
-                    'comment': request.form.get('comment-post'),
-                    'date_posted': current_date,
-                    'time_posted': current_time,
-                    'created_by': username
-                }}}})
+            mongo.db.comments.insert_one(new_comment)
 
-        return render_template(comments, post=post)
+        return render_template(all_comments, post=post, comments=comments)
 
 
 @app.route('/delete_post/<post_id>', methods=['GET', 'POST'])
