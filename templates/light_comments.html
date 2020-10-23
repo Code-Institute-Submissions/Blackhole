@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block styles %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/light_theme.css') }}">
+{% endblock %}
+{% block content %}
+
+<section id="posted-post" class="row">
+    <div class="posted-by-and-when">
+        <h4 class="post-title">
+            <!-- DISPLAYS WHO THE POST WAS POSTED BY -->
+                {{ post.created_by }} <br>
+            <!-- DISPLAYS THE TIME AND DATE THE POST WAS MADE-->
+            <span class="post-info"> {{ post.time_posted }} - {{ post.date_posted }} </span>
+        </h4>
+    </div>
+    <!-- SHOWS THE POST CONTENT -->
+    <div class="post-content">       
+        {% if post.photo_id != 'False' %}
+            {% if post.photo_id != False %}
+                <img class="post-image col s12"
+                 src="https://res.cloudinary.com/df-6999/image/upload/w_500/v1602729287/{{post.photo_id}}.webp" />
+            {% endif %}
+        {% endif %}
+        <span class="post-text">
+            {{ post.description }}
+        </span>
+    </div>
+</section>
+<hr class="comment-hr">
+<section id="post-comment">
+    <!-- COMMENT INPUT FIELDS -->
+    <div class="input-field post col s12">
+        <!-- Text descripton for the post-->
+        <textarea id="comment-post" name="comment-post" class="materialize-textarea"></textarea>
+        <label id="label-comment" for="comment-post">Type your comment here:</label>
+        <!-- post submit button -->
+        <button id="comment-btn" name="comment-submit" type="submit" class="btn"><i class="fas fa-location-arrow"></i></button>
+    </div>
+</section>
+<hr class="comment-hr">
+<section id="comments">
+    {% for comment in comments %}
+        <div class="comment-info">
+            <h5 class="post-title">
+            <!-- DISPLAYS WHO THE POST WAS POSTED BY -->
+                {{ comment.created_by }} <br>
+            <!-- DISPLAYS THE TIME AND DATE THE POST WAS MADE-->
+            <span class="post-info"> {{ comment.time_commented }} - {{ post.date_commented }} </span>
+        </h5>
+        </div>
+    {% endfor %}
+</section>
+
+{% endblock %}

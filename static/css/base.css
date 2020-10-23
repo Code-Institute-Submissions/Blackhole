@@ -191,6 +191,59 @@ body #activity {
     display: none;
 }
 
+/* COMMENT SECTION */
+
+#posted-post {
+    margin-top: 57px;
+    border-top: 2px solid blue;
+}
+
+#posted-post .posted-by-and-when,
+#posted-post .post-text {
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+#posted-post .post-text {
+    margin-left: 15%;
+    margin-top: 2em;
+    display: inline-block;
+}
+
+#comment-post {
+    width: 60%;
+    margin-left: 10%;
+    margin-right: 15%;
+}
+
+.comment-hr {
+    background-color: blue;
+    box-shadow: none;
+    text-shadow: none;
+    height: 2px;
+    border: none;
+}
+
+#label-comment {
+    left: 2.5rem;
+}
+
+#comment-btn {
+    float: right;
+    top: 50%;
+    position: absolute;
+    bottom: 50%;
+    transform: translateY(-50%);
+    right: 5%;
+}
+
+/* SETTINGS */
+
+#settings-menu {
+    margin-top: 57px;
+}
+
 /* VERY SMALL MOBILE DEVICES */
 
 @media only screen and (max-width: 350px) {

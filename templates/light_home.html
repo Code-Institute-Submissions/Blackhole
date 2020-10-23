@@ -69,13 +69,16 @@
                             src="https://res.cloudinary.com/df-6999/image/upload/w_500/v1602729287/{{post.photo_id}}.webp" />
                         {% endif %}
                     {% endif %}
-                    {{ post.description }}
+                    <span class="post-text">
+                        {{ post.description }}
+                    </span>
                     <hr>
                 </div>
                 <!-- ALLOWS THE USER TO DELETE, EDIT AND LIKE THE POST -->
                 <div class="post-interactivity">
                     <!-- DISPLAYS THE LIKE BUTTON FOR ALL USERS -->
-                    <a href="{{ url_for('like_post', post_id=post._id) }}" class="likeButton tooltipped" data-position="bottom" data-tooltip="Like" name="like"><i class="fas fa-heart"></i></a> {{ post.likes }}
+                    <a href="{{ url_for('like_post', post_id=post._id) }}" class="likeButton tooltipped" data-position="bottom" data-tooltip="Like" name="like"><i class="fas fa-heart"></i></a> {{ post.likes }} | 
+                    <a href="{{ url_for('comment', post_id=post._id) }}" class="likeButton tooltipped" data-position="bottom" data-tooltip="Comment" name="comment"><i class="fas fa-comment"></i></a>
                     {% if post.created_by == session.user %}
                         <!-- DISPLAYS THE EDIT POST AND DELETE POST JUST FOR THE USERS WHO MADE THE POST -->
                         <a class="modal-trigger tooltipped" href="#edit{{post._id}}" data-position="bottom" data-tooltip="Edit" name="edit"><i class="fas fa-pencil-alt right"></i></a>

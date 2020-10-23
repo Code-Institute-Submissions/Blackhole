@@ -160,7 +160,8 @@ def home():
                         'time_posted': current_time,
                         'likes': 0,
                         'photo_id': False,
-                        'created_by': username
+                        'created_by': username,
+                        'comments': {}
                     }
 
                     mongo.db.posts.insert_one(new_post)
@@ -185,8 +186,10 @@ def home():
                     'time_posted': current_time,
                     'likes': 0,
                     'created_by': username,
-                    'photo_id': uniqueId
-                }
+                    'photo_id': uniqueId,
+                    'comments': {}
+                    }
+
                 mongo.db.posts.insert_one(new_post)
                 flash('Posted Successfully!')
                 return redirect(url_for('home'))
@@ -199,6 +202,43 @@ def like_post(post_id):
     mongo.db.posts.find_one_and_update(
         {'_id': ObjectId(post_id)},  {'$inc': {'likes': 1}})
     return redirect(url_for('home'))
+
+
+@app.route('/comment/<post_id>', methods=['GET', 'POST'])
+def comment(post_id):
+    if 'user' not in session:
+        flash('You Need To Login First!')
+        return redirect(url_for('login'))
+    else:
+        style = mongo.db.user_settings.find_one(
+            {'username': session['user']})['dark_theme']
+        if style == 'on':
+            comments = 'comments.html'
+        else:
+            comments = 'light_comments.html'
+
+        post = mongo.db.posts.find_one({'_id': ObjectId(post_id)})
+
+        if request.method == 'POST':
+
+            username = mongo.db.users.find_one(
+                {'username': session['user']})['username']
+
+            uniqueId = username + timeDateUpload + get_random_string(15)
+
+            new_comment = {
+                uniqueId: {
+                    'comment': request.form.get('comment-post'),
+                    'date_posted': current_date,
+                    'time_posted': current_time,
+                    'created_by': username
+                }
+            }
+
+            mongo.db.posts.findAndModify(
+                {'_id': ObjectId(post_id)}, new_comment)
+
+        return render_template(comments, post=post)
 
 
 @app.route('/delete_post/<post_id>', methods=['GET', 'POST'])
