@@ -218,19 +218,13 @@ def all_comments(post_id):
         post = mongo.db.posts.find_one({'_id': ObjectId(post_id)})
         str_post_id = str(post_id)
 
-        comments = list(mongo.db.comments.find({'comment_info.comment_for': str_post_id}))
-
-        print(comments)
-        #print(search_string)
-        print(str_post_id)
-        print(post_id)
+        search_string = '{}.{}'.format('comment_info.comment_for', str_post_id)
+        comments = list(mongo.db.comments.find({'comment_info.comment_for': str_post_id})) 
 
         if request.method == 'POST':
 
             username = mongo.db.users.find_one(
                 {'username': session['user']})['username']
-
-            uniqueId = username + timeDateUpload + get_random_string(15)
 
             new_comment = {'comment_info': {
                 'comment_for': post_id,
