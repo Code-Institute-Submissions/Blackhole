@@ -84,7 +84,7 @@
                 <div class="modal-footer">
                     <!-- MODAL BUTTONS TO CONFIRM THE DELETE OR CANCEL -->
                     <a href="#" name="cancel" class="modal-close btn left cancel">Cancel</a>
-                    <a href="{{ url_for('delete_comment', comment_id=comment._id, post_id=post._id) }}" name="delete" class="modal-close btn right delete red accent-4">Delete</a>
+                    <a href="{{ url_for('delete_comment', post_id=post._id, comment_id=comment._id) }}" name="delete" class="modal-close btn right delete red accent-4">Delete</a>
                 </div>
             </div>
     {% endfor %}

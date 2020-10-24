@@ -5,11 +5,58 @@
 {% block content %}
 
 <section id="settings-menu" class="row">
-    <div class="col s3"></div>
+    <div class="col s2"></div>
     <!--SETTINGS -->
-    <div class="input-field col s6">
-        <form method="POST" action="{{ url_for ('settings') }}">
+    <div class="input-field col s8">
+        <form method="POST" action="{{ url_for ('username_update') }}">
+            <div id="account-username">
+                <h3>Account Settings</h3>
+                <hr class="sub-sec-divide">
+                <!-- CHANGE THE USERNAME INPUT -->
+                <h5> Change Username </h5>
+                <p>Youll Be Logged Out If You Change Your Username</p>
+                <div class="input-field col s12">
+                <input id="change-username" name="change-username" type="text" class="validate"
+                     minlength="5" maxlength="20" pattern="^[a-zA-Z0-9]{5,20}$" 
+                     onfocusout="formCheck('change-username', 'change-username-error', /^[A-Za-z0-9]+$/, 5, 'Letters or Numbers')" required>
+                    <label for="username">Change Username</label>
+                    <span id="change-username-error" class="error-message"></span>
+                </div>
+                <div class="input-field col s12">
+                    <input id="username-password-check" name="username-password-check" type="password" class="validate"
+                     minlength="10" maxlength="30" required>
+                    <label for="username-password-check">Enter Password</label>
+                    <span id="username-password-check-error" class="error-message"></span>
+                </div>
+                <hr class="sub-sec-divide">
+            </div>
+        </form>
+        <form method="POST" action="{{ url_for ('password_update') }}">
+            <div id="account-password">
+                <!-- CHANGE THE PASSWORD INPUT -->
+                <h5> Change Password </h5>
+                <div class="input-field col s12">
+                    <input id="old-password" name="old-password" type="password" class="validate"
+                     minlength="10" maxlength="30" required>
+                     <label for="old-password">Old Password</label>
+                    <span id="old-password-error" class="error-message"></span>
+                </div>
+                <div class="input-field col s12">
+                    <input id="new-password" name="new-password" type="password" class="validate"
+                     minlength="10" maxlength="30" required>
+                    <label for="new-password">New Password</label>
+                    <span id="new-password-error" class="error-message"></span>
+                </div>
+                <div class="input-field col s12">
+                    <input id="new-password-confirm" name="new-password-confirm" type="password" class="validate"
+                     minlength="10" maxlength="30" required>
+                    <label for="new-password-confirm">Confirm Password</label>
+                    <span id="new-password-confirm-error" class="error-message"></span>
+                </div>
+            </div>
+        </form>
             <!-- THEME SECTION -->
+        <form method="POST" action="{{ url_for ('settings') }}">
             <div id="themes" class="sub-title">
                 <h3>Themes</h3>
                 <hr class="sub-sec-divide">
@@ -17,7 +64,7 @@
                 <div class="switch">
                     <label for="dark_theme">
                         Dark Theme
-                        <input type="checkbox" id="dark_theme" name="dark_theme">
+                        <input type="checkbox" id="dark_theme" name="dark_theme" checked>
                         <span id="dark_switch" class="lever right"></span>
                     </label>
                 </div>
@@ -26,7 +73,7 @@
                 <div class="switch">
                     <label for="light_theme">
                         Light Theme
-                        <input type="checkbox" id="light_theme" name="light_theme" checked>
+                        <input type="checkbox" id="light_theme" name="light_theme">
                         <span id="light_switch" class="lever right"></span>
                     </label>
                 </div>
@@ -38,6 +85,6 @@
             </div>
         </form>
     </div>
-    <div class="col s3"></div>
+    <div class="col s2"></div>
 </section>
 {% endblock %}

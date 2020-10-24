@@ -20,7 +20,6 @@ from cloudinary.utils import cloudinary_url
 import random
 import string
 
-
 if os.path.exists('env.py'):
     import env
 
@@ -242,13 +241,14 @@ def all_comments(post_id):
         return render_template(all_comments, post=post, comments=comments)
 
 
-@app.route('/delete_comment/<comment_id>', methods=['GET', 'POST'])
-def delete_comment(comment_id):
+@app.route('/delete_comment/<post_id>/<comment_id>/', methods=['GET', 'POST'])
+def delete_comment(post_id, comment_id):
 
     mongo.db.comments.delete_one({'_id': ObjectId(comment_id)})
     print(comment_id)
 
-    return redirect(url_for('home'))
+    return redirect(url_for(
+        'all_comments', post_id=post_id, comment_id=comment_id))
 
 
 @app.route('/delete_post/<post_id>', methods=['GET', 'POST'])
