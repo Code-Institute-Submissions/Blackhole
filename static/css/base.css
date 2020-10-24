@@ -244,6 +244,10 @@ body #activity {
     margin-top: 57px;
 }
 
+.sub-sec-divide {
+    overflow: hidden;
+}
+
 /* VERY SMALL MOBILE DEVICES */
 
 @media only screen and (max-width: 350px) {

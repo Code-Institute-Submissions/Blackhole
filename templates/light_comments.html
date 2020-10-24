@@ -45,10 +45,13 @@
         <div class="comment-info">
             <h5 class="post-title">
             <!-- DISPLAYS WHO THE POST WAS POSTED BY -->
-                {{ comments.created_by }} <br>
+                {{ comment.comment_info.created_by }} <br>
             <!-- DISPLAYS THE TIME AND DATE THE POST WAS MADE-->
-            <span class="post-info"> {{ comments.time_commented }} - {{ comments.date_commented }} </span>
+            <span class="post-info"> {{ comment.comment_info.time_posted }} - {{ comment.comment_info.date_posted }} </span>
         </h5>
+        </div>
+        <div class="comment-content">
+            {{ comment.comment_info.comment }}
         </div>
     {% endfor %}
 </section>

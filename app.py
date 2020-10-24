@@ -216,11 +216,13 @@ def all_comments(post_id):
             all_comments = 'light_comments.html'
 
         post = mongo.db.posts.find_one({'_id': ObjectId(post_id)})
+        str_post_id = str(post_id)
 
-        comments = list(mongo.db.comments.find({'comment_for':post_id}).sort([('_id', -1)]))
+        comments = list(mongo.db.comments.find({'comment_info.comment_for': str_post_id}))
 
         print(comments)
-
+        #print(search_string)
+        print(str_post_id)
         print(post_id)
 
         if request.method == 'POST':
@@ -230,7 +232,7 @@ def all_comments(post_id):
 
             uniqueId = username + timeDateUpload + get_random_string(15)
 
-            new_comment = {uniqueId: {
+            new_comment = {'comment_info': {
                 'comment_for': post_id,
                 'comment': request.form.get('comment-post'),
                 'date_posted': current_date,
@@ -245,14 +247,10 @@ def all_comments(post_id):
 
 @app.route('/delete_post/<post_id>', methods=['GET', 'POST'])
 def delete_post(post_id):
-    if 'user' not in session:
-        flash('You Need To Login First!')
-        return redirect(url_for('login'))
-    else:
 
-        mongo.db.posts.remove({'_id': ObjectId(post_id)})
+    mongo.db.posts.remove({'_id': ObjectId(post_id)})
 
-        return redirect(url_for('home'))
+    return redirect(url_for('home'))
 
 
 @app.route('/edit_post/<post_id>', methods=['GET', 'POST'])
@@ -328,9 +326,27 @@ def settings():
             mongo.db.user_settings.update(
                 {"username": session['user']}, settings)
 
+            if not request.form.get('change-username') == '':
+
+                usernameUpdate = {
+                    'username': request.form.get('change-username')
+                }
+
             flash('Settings Updated')
             return redirect('settings')
         return render_template(settings_html)
+
+
+@app.route('/username_update', methods=['GET', 'POST'])
+def username_update(username):
+
+    return redirect(url_for('settings'))
+
+
+@app.route('/password_update', methods=['GET', 'POST'])
+def password_update(username):
+
+    return redirect(url_for('settings'))
 
 
 if __name__ == "__main__":
