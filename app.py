@@ -218,25 +218,37 @@ def all_comments(post_id):
         post = mongo.db.posts.find_one({'_id': ObjectId(post_id)})
         str_post_id = str(post_id)
 
-        search_string = '{}.{}'.format('comment_info.comment_for', str_post_id)
-        comments = list(mongo.db.comments.find({'comment_info.comment_for': str_post_id})) 
+        comments = list(mongo.db.comments.find(
+            {'comment_info.comment_for': str_post_id}))
 
         if request.method == 'POST':
+            if request.form.get('comment-post') == '':
+                flash('You Need To Add Something To Post!')
 
-            username = mongo.db.users.find_one(
-                {'username': session['user']})['username']
+            else:
+                username = mongo.db.users.find_one(
+                    {'username': session['user']})['username']
 
-            new_comment = {'comment_info': {
-                'comment_for': post_id,
-                'comment': request.form.get('comment-post'),
-                'date_posted': current_date,
-                'time_posted': current_time,
-                'created_by': username
-            }}
+                new_comment = {'comment_info': {
+                    'comment_for': post_id,
+                    'comment': request.form.get('comment-post'),
+                    'date_posted': current_date,
+                    'time_posted': current_time,
+                    'created_by': username
+                }}
 
-            mongo.db.comments.insert_one(new_comment)
+                mongo.db.comments.insert_one(new_comment)
 
         return render_template(all_comments, post=post, comments=comments)
+
+
+@app.route('/delete_comment/<comment_id>', methods=['GET', 'POST'])
+def delete_comment(comment_id):
+
+    mongo.db.comments.delete_one({'_id': ObjectId(comment_id)})
+    print(comment_id)
+
+    return redirect(url_for('home'))
 
 
 @app.route('/delete_post/<post_id>', methods=['GET', 'POST'])

@@ -195,7 +195,7 @@ body #activity {
 
 #posted-post {
     margin-top: 57px;
-    border-top: 2px solid blue;
+    border-top: 2px solid;
 }
 
 #posted-post .posted-by-and-when,
@@ -217,8 +217,9 @@ body #activity {
     margin-right: 15%;
 }
 
+/* POSTING A NEW COMMENT */
+
 .comment-hr {
-    background-color: blue;
     box-shadow: none;
     text-shadow: none;
     height: 2px;
@@ -236,6 +237,29 @@ body #activity {
     bottom: 50%;
     transform: translateY(-50%);
     right: 5%;
+}
+
+/* COMMENTS */
+
+#comments {
+    padding: 5%;
+}
+
+.comment-container {
+    margin: 2.5%;
+    border: solid 2px;
+    border-radius: 5px;
+}
+
+.comment-info,
+.comment-content {
+    padding: 5%;
+}
+
+.deleteBtn {
+    justify-content: center;
+    display: flex;
+    padding: 0.75em;
 }
 
 /* SETTINGS */
