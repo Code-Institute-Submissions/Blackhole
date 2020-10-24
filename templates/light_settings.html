@@ -8,6 +8,18 @@
     <div class="col s2"></div>
     <!--SETTINGS -->
     <div class="input-field col s8">
+    <section>
+        <!-- flash messages -->
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="row flashes">
+                        <h3 class="center-align">{{ message }}</h3>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </section>
         <form method="POST" action="{{ url_for ('username_update') }}">
             <div id="account-username">
                 <h3>Account Settings</h3>
@@ -28,9 +40,10 @@
                     <label for="username-password-check">Enter Password</label>
                     <span id="username-password-check-error" class="error-message"></span>
                 </div>
-                <hr class="sub-sec-divide">
+                <button type="submit" id="save" class="btn" name="save">Save</button>
             </div>
         </form>
+        <hr class="sub-sec-divide">
         <form method="POST" action="{{ url_for ('password_update') }}">
             <div id="account-password">
                 <!-- CHANGE THE PASSWORD INPUT -->
@@ -64,7 +77,7 @@
                 <div class="switch">
                     <label for="dark_theme">
                         Dark Theme
-                        <input type="checkbox" id="dark_theme" name="dark_theme" checked>
+                        <input type="checkbox" id="dark_theme" name="dark_theme">
                         <span id="dark_switch" class="lever right"></span>
                     </label>
                 </div>
@@ -73,7 +86,7 @@
                 <div class="switch">
                     <label for="light_theme">
                         Light Theme
-                        <input type="checkbox" id="light_theme" name="light_theme">
+                        <input type="checkbox" id="light_theme" name="light_theme" checked>
                         <span id="light_switch" class="lever right"></span>
                     </label>
                 </div>

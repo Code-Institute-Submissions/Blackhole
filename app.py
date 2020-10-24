@@ -158,6 +158,7 @@ def home():
                         'date_posted': current_date,
                         'time_posted': current_time,
                         'likes': 0,
+                        'comments': 0,
                         'photo_id': False,
                         'created_by': username,
                     }
@@ -183,6 +184,7 @@ def home():
                     'date_posted': current_date,
                     'time_posted': current_time,
                     'likes': 0,
+                    'comments': 0,
                     'created_by': username,
                     'photo_id': uniqueId,
                     }
@@ -237,6 +239,12 @@ def all_comments(post_id):
                 }}
 
                 mongo.db.comments.insert_one(new_comment)
+
+                mongo.db.posts.find_one_and_update(
+                    {'_id': ObjectId(post_id)},  {'$inc': {'comments': 1}})
+
+                return redirect(url_for(
+                    'all_comments', post_id=post_id))
 
         return render_template(all_comments, post=post, comments=comments)
 
@@ -313,8 +321,6 @@ def settings():
         flash('You Need To Login First!')
         return redirect(url_for('login'))
     else:
-        # for the themes add if statements in the base
-        # url to check the user settings and display specific css
         style = mongo.db.user_settings.find_one(
             {'username': session['user']})['dark_theme']
         if style == 'on':
@@ -332,19 +338,26 @@ def settings():
             mongo.db.user_settings.update(
                 {"username": session['user']}, settings)
 
-            if not request.form.get('change-username') == '':
-
-                usernameUpdate = {
-                    'username': request.form.get('change-username')
-                }
-
             flash('Settings Updated')
             return redirect('settings')
         return render_template(settings_html)
 
-
 @app.route('/username_update', methods=['GET', 'POST'])
 def username_update(username):
+
+    print(mongo.db.users.password.find_one({'username': session['user']}))
+
+    if request.method == 'POST':
+
+        usernameUpdate = {
+            'username': request.form.get('change-username').lower()
+        }
+
+        mongo.db.users.find_one_and_update({'username': session['user']}, usernameUpdate)
+
+        session.pop['user']
+
+        session["user"] = request.form.get("change-username").lower()
 
     return redirect(url_for('settings'))
 

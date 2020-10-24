@@ -1,6 +1,6 @@
 body {
     background-color: black;
-    color: #ffffff;
+    color: #0277bd;
 }
 
 /* NAV MENU */
@@ -89,5 +89,35 @@ nav {
 /* MODAL FOOTER BUTTONS */
 
 .modal .modal-footer .cancel {
-    background-color: #3e3e3e;;
+    background-color: #3e3e3e;
+}
+
+/* COMMENT SECTION */
+
+#posted-post {
+    border-color: #0277bd
+}
+
+/* NEW COMMENT */ 
+
+#new-comment #label-comment,
+#new-comment #comment-post {
+    color: #0277bd;
+    border-color: #0277bd;
+}
+
+.comment-hr {
+    background-color: #0277bd;
+}
+
+#comment-btn {
+    background-color: #0277bd;
+}
+
+/* COMMENTS */
+
+.comment-container {
+    background-color: #3e3e3e;
+    border-color: #0277bd;
+    color: black;
 }

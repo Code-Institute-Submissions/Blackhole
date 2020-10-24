@@ -21,7 +21,6 @@ nav .brand-logo {
     display: flex;
     justify-content: space-between;
     height: 56px;
-    margin-right: 15px;
 }
 
 @media screen and (min-width: 600px) {
@@ -37,7 +36,7 @@ nav .brand-logo {
 /* SIDE VIEW */
 
 .side-view {
-    height: 600px;
+    height: 100%;
     position: fixed;
 }
 
@@ -256,6 +255,14 @@ body #activity {
     padding: 5%;
 }
 
+.post-text {
+    font-size: 24px
+}
+
+.comment-content {
+    overflow-wrap: anywhere;
+}
+
 .deleteBtn {
     justify-content: center;
     display: flex;
@@ -381,6 +388,21 @@ body #activity {
     .side-view {
         margin-top: 64px;
         width: 258.328px;
+    }
+
+    /* COMMENTS */
+
+    #posted-post br,
+    .comment-info br{
+        display:none;
+    }
+
+    .post-username {
+        width: 50%;
+    }
+
+    .post-info {
+        float:right;
     }
 
 }
