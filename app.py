@@ -46,13 +46,12 @@ timeUpload = now.strftime("%H%M%S")
 dateUpload = now.strftime('%Y%M%S')
 timeDateUpload = "/" + dateUpload + timeUpload
 
+
 def get_random_string(length):
     letters = string.ascii_lowercase
     result_str = ''.join(random.choice(letters) for i in range(length))
     return result_str
 
-
-#https://res.cloudinary.com/df-6999/image/upload/v1602729287/r00tacc0unt123/20203326023326.jpg
 
 @app.route('/')
 @app.route("/login", methods=["GET", "POST"])
@@ -285,36 +284,6 @@ def edit_post(post_id):
     return redirect(url_for('home'))
 
 
-@app.route('/messages')
-def messages():
-    if 'user' not in session:
-        flash('You Need To Login First!')
-        return redirect(url_for('login'))
-    else:
-        style = mongo.db.user_settings.find_one(
-            {'username': session['user']})['dark_theme']
-        if style == 'on':
-            news_feed = 'messages.html'
-        else:
-            news_feed = 'light_messages.html'
-        return render_template(news_feed)
-
-
-@app.route('/notifications')
-def notifications():
-    if 'user' not in session:
-        flash('You Need To Login First!')
-        return redirect(url_for('login'))
-    else:
-        style = mongo.db.user_settings.find_one(
-            {'username': session['user']})['dark_theme']
-        if style == 'on':
-            notifications = 'notifications.html'
-        else:
-            notifications = 'light_notifications.html'
-        return render_template(notifications)
-
-
 @app.route('/settings', methods=['GET', 'POST'])
 def settings():
     if 'user' not in session:
@@ -342,33 +311,8 @@ def settings():
             return redirect('settings')
         return render_template(settings_html)
 
-@app.route('/username_update', methods=['GET', 'POST'])
-def username_update(username):
-
-    print(mongo.db.users.password.find_one({'username': session['user']}))
-
-    if request.method == 'POST':
-
-        usernameUpdate = {
-            'username': request.form.get('change-username').lower()
-        }
-
-        mongo.db.users.find_one_and_update({'username': session['user']}, usernameUpdate)
-
-        session.pop['user']
-
-        session["user"] = request.form.get("change-username").lower()
-
-    return redirect(url_for('settings'))
-
-
-@app.route('/password_update', methods=['GET', 'POST'])
-def password_update(username):
-
-    return redirect(url_for('settings'))
-
 
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
-            debug=True)
+            debug=False)
