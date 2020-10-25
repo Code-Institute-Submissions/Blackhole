@@ -21,34 +21,10 @@
         {% endwith %}
     </section>
         <h3>Account Settings</h3>
-        <form method="POST" action="{{ url_for ('password_update') }}">
-            <div id="account-password">
-                <!-- CHANGE THE PASSWORD INPUT -->
-                <h5> Change Password </h5>
-                <div class="input-field col s12">
-                    <input id="old-password" name="old-password" type="password" class="validate"
-                     minlength="10" maxlength="30" required>
-                     <label for="old-password">Old Password</label>
-                    <span id="old-password-error" class="error-message"></span>
-                </div>
-                <div class="input-field col s12">
-                    <input id="new-password" name="new-password" type="password" class="validate"
-                     minlength="10" maxlength="30" required>
-                    <label for="new-password">New Password</label>
-                    <span id="new-password-error" class="error-message"></span>
-                </div>
-                <div class="input-field col s12">
-                    <input id="new-password-confirm" name="new-password-confirm" type="password" class="validate"
-                     minlength="10" maxlength="30" required>
-                    <label for="new-password-confirm">Confirm Password</label>
-                    <span id="new-password-confirm-error" class="error-message"></span>
-                </div>
-            </div>
-        </form>
             <!-- THEME SECTION -->
         <form method="POST" action="{{ url_for ('settings') }}">
             <div id="themes" class="sub-title">
-                <h3>Themes</h3>
+                <h5>Themes</h5>
                 <hr class="sub-sec-divide">
                 <!-- DARK THEME -->
                 <div class="switch">
@@ -70,7 +46,6 @@
             </div>
             <!-- SAVE / RESET SETTINGS BUTTON -->
             <div id="settings-buttons">
-                <button type="submit" id="reset" class="btn" name="reset">Reset</button>
                 <button type="submit" id="save" class="btn" name="save">Save</button>
             </div>
         </form>
