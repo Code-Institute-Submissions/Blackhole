@@ -19,19 +19,6 @@ function formCheck(formTag, popUpTag, pattern, minLimit, returnSpecific) {
 };
 
 
-    // DOB VALIDATION 
-
-function dobCheck() {
-
-    var userInput = document.forms['signUpForm']['DOB'].value;
-    var popUp = document.getElementById('dob-error')
-
-    if (userInput == '') {
-        popUp.innerHTML = 'You Need To Complete This Form!';
-    };
-};
-
-
     // PASSWORD VALIDATION
 
 function passCheck(passTag, passTagTwo, popUpTag) {
@@ -44,15 +31,13 @@ function passCheck(passTag, passTagTwo, popUpTag) {
         popUp.innerHTML = 'You Need To Complete This Form!';
     } else if ( userInput.length < 10) {
         popUp.innerHTML = 'Your Password Is Too Small!';
-    } else if ( userInput = passConfirm ) {
-        popUp.innerHTML = 'Password Do Not Match!';
     } else {
         popUp.innerHTML = '';
     };
 };
 
 
-// CALENDAR FOR DOB ON SIGN UP
+// MATERALIZE FUNCTIONS
 
 $(document).ready(function(){
     $('.datepicker').datepicker({
@@ -73,7 +58,7 @@ function preview_image(event)
  var reader = new FileReader();
  reader.onload = function()
  {
-  var output = document.getElementById('output');
+  var output = document.getElementById('image-output');
   output.src = reader.result;
  }
  reader.readAsDataURL(event.target.files[0]);
@@ -81,18 +66,20 @@ function preview_image(event)
  $('#preview-image').css('display','block');
 }
 
-// POP OUT MENUS AND ACTIVATION
 
-$(document).on('click', '#profile-icon', function() {
-    $('#profile-pop-out-section').toggle();
+// CLEARING INPUT 
+
+$(document).on('click', '#clear-post', function() {
+    $('#activity-post').val('');
+    $('#image-post').val('');
+    $('#preview-image').css('display','none');
+    location.reload();
 })
+
+// OPENING IMAGE UPLOAD
 
 $(document).on('click', '#image-post-icon', function() {
     $('#image-post').click();
-})
-
-$(document).on('click', '#messages-icon', function() {
-    $('#messages-pop-out-section').click();
 })
 
 // SETTINGS THEMES SWITCHES

@@ -9,9 +9,6 @@
     <div id="profile-home" class="side-view">
         <div class="contain">
             <div id="home-mobile-side-nav">
-                <div id="profile-pop-out">
-                    <i id="profile-icon" class="profile-pop-out-icon fas fa-user-circle tooltipped" data-position="bottom" data-tooltip="Profile"></i>
-                </div>
             </div>
         </div>
     </div>
@@ -31,21 +28,20 @@
     </section>
         <div class="contain">
             <form id="new-post" method="POST" action="{{ url_for('home') }}" enctype="multipart/form-data">
-                <!-- IMAGE PREVIEW ON UPLOAD -->
-                <div id="image_preview">
-                    <img id="output" class="col s12" />
-                </div>
                 <!-- POST INPUT FIELDS -->
                 <div class="input-field post col s12">
+                    <!-- IMAGE PREVIEW ON UPLOAD -->
+                    <div id="image_preview">
+                        <img id="image-output" class="col s12" />
+                    </div>
                     <!-- Text descripton for the post-->
                     <textarea id="activity-post" name="activity-post" class="materialize-textarea"></textarea>
                     <label id="label-post" for="activity-post">Type your new post here:</label>
-                    <!-- image upload ( need to add image preview still ) -->
+                    <!-- image upload -->
                     <input type="file" name="image-post" id="image-post" accept="image/*,video/*" onchange="preview_image(event)" hidden="hidden">
                     <i id="image-post-icon" class="btn fas fa-camera"></i>
-                    <!-- mentioning friends on the post which also notifies the friend ( still need to figure out how to do it )-->
-                    <input type="checkbox" name="post-mentions" id="post-mentions" hidden>
-                    <i id="post-mentions-icon" class="btn fas fa-users"></i>
+                    <!-- clear input area -->
+                    <i id="clear-post" class="btn fas fa-window-close" data-position="bottom" data-tooltip="clear"></i>
                     <!-- post submit button -->
                     <button name="post-submit" type="submit" class="btn" style="float:right;"><i class="fas fa-location-arrow"></i></button>
                 </div>
@@ -164,13 +160,6 @@
             </div>
             {% endfor %}
         </div>
-    </div>
-</section>
-<!-- POP OUTS FOR MOBILE -->
-<section id="pop-outs" class="row">
-    <!-- POP OUT FOR THE PROFILE SECTION -->
-    <div id="profile-pop-out-section" class="col s10">
-        Test
     </div>
 </section>
 

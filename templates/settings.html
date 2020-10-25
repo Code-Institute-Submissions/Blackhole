@@ -20,29 +20,7 @@
             {% endif %}
         {% endwith %}
     </section>
-        <form method="POST" action="{{ url_for ('username_update') }}">
-            <div id="account-username">
-                <h3>Account Settings</h3>
-                <hr class="sub-sec-divide">
-                <!-- CHANGE THE USERNAME INPUT -->
-                <h5> Change Username </h5>
-                <p>Youll Be Logged Out If You Change Your Username</p>
-                <div class="input-field col s12">
-                <input id="change-username" name="change-username" type="text" class="validate"
-                     minlength="5" maxlength="20" pattern="^[a-zA-Z0-9]{5,20}$" 
-                     onfocusout="formCheck('change-username', 'change-username-error', /^[A-Za-z0-9]+$/, 5, 'Letters or Numbers')" required>
-                    <label for="username">Change Username</label>
-                    <span id="change-username-error" class="error-message"></span>
-                </div>
-                <div class="input-field col s12">
-                    <input id="username-password-check" name="username-password-check" type="password" class="validate"
-                     minlength="10" maxlength="30" required>
-                    <label for="username-password-check">Enter Password</label>
-                    <span id="username-password-check-error" class="error-message"></span>
-                </div>
-                <hr class="sub-sec-divide">
-            </div>
-        </form>
+        <h3>Account Settings</h3>
         <form method="POST" action="{{ url_for ('password_update') }}">
             <div id="account-password">
                 <!-- CHANGE THE PASSWORD INPUT -->
